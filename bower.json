@@ -1,0 +1,22 @@
+{
+  "name": "shopping_mall_06",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Giang LeLe <lvgvictory@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/lvgvictory/shopping_mall_06",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "bower_site": "*"
+  }
+}
