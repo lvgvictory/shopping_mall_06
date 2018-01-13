@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,6 +17,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'image',
+        'role',
+        'phone',
+        'address',
         'password',
     ];
 
@@ -29,8 +33,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
-    protected $table = 'users';
 
     public function bills()
     {
@@ -47,8 +49,8 @@ class User extends Authenticatable
         return $this->hasMany(Social::class);
     }
 
-    public function news()
+    public function posts()
     {
-        return $this->hasMany(New::class);
+        return $this->hasMany(Post::class);
     }
 }

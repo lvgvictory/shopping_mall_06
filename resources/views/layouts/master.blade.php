@@ -27,7 +27,7 @@
         {{ Html::style('css/myCss.css') }}
 
         <!-- js -->
-        {{ Html::script('library/jquery/dist/jquery-2.1.4.min.js')}}
+        {{ Html::script('library/bower_site/jquery-2.1.4.min.js')}}
         {{ Html::script('library/bower_site/imagezoom.js') }}
         {{ Html::script('library/bower_site/jquery.flexslider.js') }}
         {{ Html::script('library/bower_site/jquery-ui.js') }}
