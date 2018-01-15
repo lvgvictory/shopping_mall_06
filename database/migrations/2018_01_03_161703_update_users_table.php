@@ -17,7 +17,8 @@ class UpdateUsersTable extends Migration
             $table->string('password')->nullable()->change();
             $table->string('address')->after('password')->nullable();
             $table->string('phone')->after('password')->nullable();
-            $table->tinyInteger('role')->after('password');
+            $table->tinyInteger('role')->after('password')->default(2);
+            $table->tinyInteger('status')->after('password')->default(1);
             $table->string('image')->nullable()->after('password');
         });
     }

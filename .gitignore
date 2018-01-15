@@ -12,4 +12,5 @@ yarn-error.log
 .env
 /public/library
 /public/site/images
+/public/img
 
