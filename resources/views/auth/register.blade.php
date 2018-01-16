@@ -8,7 +8,7 @@
       <link rel="stylesheet" href="{{ asset('library/boostrap/css/bootstrap.min.css') }}" />
       <link rel="stylesheet" href="{{ asset('library/ionicons/css/ionicons.min.css') }}" />
       <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-      <link rel="stylesheet" href="{{ asset('css/style.css')}}" />
+      <link rel="stylesheet" href="{{ asset('css/admin/style-login.css')}}" />
    </head>
    <body>
       <!--hero section-->
@@ -83,7 +83,7 @@
                            <a href="#" class="btn btn-github"><em class="ion-social-github"></em></a>
                         </p>
                         <p class="text-center">
-                           Welcome SmartShop! <a href="register.html">Login Now</a>
+                           Welcome SmartShop! <a href="{{ route('login') }}">Login Now</a>
                         </p>
                      </div>
                   </div>
