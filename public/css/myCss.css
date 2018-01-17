@@ -23,3 +23,9 @@
     animation-delay: 0.5s;
     animation-name: slideInRight;    
 }
+
+#horizontalTab{
+    display: block;
+    width: 100%;
+    margin: 0px;
+}

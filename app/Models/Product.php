@@ -3,9 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Discount;
+use App\Models\Comment;
+use DB;
 
 class Product extends Model
 {
+    protected $fillable = [
+        'name',
+        'price',
+        'description',
+        'slug',
+        'status',
+        'total',
+        'subcategory_id',
+        'discount_id',
+    ];
+
+    protected $primaryKey = 'id';
+
     public function images()
     {
     	return $this->hasMany(Image::class);
@@ -34,5 +50,15 @@ class Product extends Model
     public function discount()
     {
     	return $this->belongsTo(Discount::class);
+    }
+
+    public function scopeGetAllProductByDiscount($query)
+    {
+        $listProduct = $query->join('discounts', 'discount_id', '=', 'discounts.id')
+                            ->select('products.*', 'discounts.discount')
+                            ->where('discounts.discount', '>', config('custom.defaultDiscount'))
+                            ->orderBy('discounts.discount', 'desc')
+                            ->paginate(config('custom.defaultPage'));
+        return $listProduct;
     }
 }
