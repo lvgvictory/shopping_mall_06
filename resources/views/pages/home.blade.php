@@ -1,17 +1,35 @@
 @extends('layouts.master')
+@section('style')
+{{ Html::style('css/myCss.css')}}
+@endsection
 @section('content')
 @include('layouts.slide')
 <div class="new_arrivals">
     <div class="container">
-        <h3><span>new </span>arrivals</h3>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
+        <h3><span> {{ trans('messages.arrivals') }} </span></h3>
         <div class="new_grids">
             <div class="col-md-4 new-gd-left">
-                <img src="site/images/wed1.jpg" alt=" " />
+                @php
+                $firstProduct = $products->first();
+                $firstDiscount = $firstProduct->discount->first();
+                $fitDiscount = $firstDiscount->discount;
+                $img = $firstProduct->images->first();
+                @endphp
+                <img src="site/images/{{ $img->image }}" alt=" " />
                 <div class="wed-brand simpleCart_shelfItem">
-                    <h4>Wedding Collections</h4>
-                    <h5>Flat 50% Discount</h5>
-                    <p><i>$250</i> <span class="item_price">$500</span><a class="item_add hvr-outline-out button2" href="#"> {{ trans('messages.add_to_cart') }} </a></p>
+                    <h4>{{ $firstProduct->name }}</h4>
+                    @if ($fitDiscount)
+                    @php
+                    $priceDiscount = ($firstProduct->price * (1 - $fitDiscount/100));
+                    @endphp
+                    <h5>{{ trans('messages.Discount') }} {{ $fitDiscount }} {{ trans('messages.%') }} </h5>
+                    <p><i>{{ number_format($firstProduct->price) }} {{ trans('messages.$') }}</i>
+                    <span class="item_price">{{ number_format($priceDiscount) }} {{ trans('messages.$') }}</span>
+                    @else
+                    <span class="item_price"> {{ number_format($firstProduct->price) }} {{ trans('messages.$') }} </span>
+                    @endif
+                    <a class="item_add hvr-outline-out button2" href="#">{{ trans('messages.add_to_cart') }}</a>
+                    </p>
                 </div>
             </div>
             <div class="col-md-4 new-gd-middle">
@@ -20,15 +38,15 @@
                         <img src="site/images/levis1.png" alt=" " />
                     </div>
                     <div class="mid-text">
-                        <h4>up to 40% <span>off</span></h4>
-                        <a class="hvr-outline-out button2" href="product.html">Shop now </a>
+                        <h4>{{ trans('messages.up_to_40%') }} <span> {{ trans('messages.off') }} </span></h4>
+                        <a class="hvr-outline-out button2" href="product.html"> {{ trans('messages.Shop_now') }} </a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="new-levis">
                     <div class="mid-text">
-                        <h4>up to 50% <span>off</span></h4>
-                        <a class="hvr-outline-out button2" href="product.html">Shop now </a>
+                        <h4>{{ trans('messages.up_to_50%') }} <span>{{ trans('messages.off') }}</span></h4>
+                        <a class="hvr-outline-out button2" href="product.html"> {{ trans('messages.Shop_now') }} </a>
                     </div>
                     <div class="mid-img">
                         <img src="site/images/dig.jpg" alt=" " />
@@ -40,8 +58,8 @@
             <div class="col-md-4 new-gd-left">
                 <img src="site/images/wed2.jpg" alt=" " />
                 <div class="wed-brandtwo simpleCart_shelfItem">
-                    <h4>Spring / Summer</h4>
-                    <p>Shop Men</p>
+                    <h4>{{ trans('messages.Spring_/_Summer') }}</h4>
+                    <p>{{ trans('messages.Shop_Men') }}</p>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -53,34 +71,61 @@
     <div class="col-md-7 content-lgrid">
         <div class="col-sm-6 content-img-left text-center">
             <div class="content-grid-effect slow-zoom vertical">
-                <div class="img-box"><img src="site/images/p1.jpg" alt="image" class="img-responsive zoom-img"></div>
+                @php
+                $disProduct = $listProduct[0];
+                $disDiscount = $disProduct->discount;
+                $img = $disProduct->images;
+                @endphp
+                <div class="img-box"><img src="site/images/{{ $img[0]['image'] }}" alt="image" class="img-responsive zoom-img"></div>
                 <div class="info-box">
                     <div class="info-content simpleCart_shelfItem">
-                        <h4>Mobiles</h4>
+                        <h4>{{ $disProduct->name }}</h4>
                         <span class="separator"></span>
-                        <p><span class="item_price">$500</span></p>
+                        @if ($disDiscount)
+                        @php
+                        $dis_price = $disProduct->price * (1 - $disDiscount/100);
+                        @endphp
+                        <p><del>{{ number_format($disProduct->price) }} {{ trans('messages.$') }}</del>
+                        <span class="item_price">{{ number_format($dis_price) }} {{ trans('messages.$') }}</span></p>
+                        @else
+                        <p><span class="item_price">{{ number_format($disProduct->price) }} {{ trans('messages.$') }}</span></p>
+                        @endif
                         <span class="separator"></span>
-                        <a class="item_add hvr-outline-out button2" href="#">add to cart </a>
+                        <a class="item_add hvr-outline-out button2" href="#"> {{ trans('messages.add_to_cart') }} </a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-sm-6 content-img-right">
-            <h3>Special Offers and 50%<span>Discount On</span> Mobiles</h3>
+            <h3>{{ trans('messages.Special_Offers_and_50%') }}<span>{{ trans('messages.Discount_On') }}</span></h3>
         </div>
         <div class="col-sm-6 content-img-right">
-            <h3>Buy 1 get 1  free on <span> Branded</span> Watches</h3>
+            <h3>{{ trans('messages.Buy_1_get_1_free_on') }} <span> {{trans('messages.Branded') }} </span></h3>
         </div>
         <div class="col-sm-6 content-img-left text-center">
             <div class="content-grid-effect slow-zoom vertical">
-                <div class="img-box"><img src="site/images/p2.jpg" alt="image" class="img-responsive zoom-img"></div>
+                @php
+                $rateProduct = $rateProducts->first();
+                $rateDiscount = $rateProduct->discount;
+                $raDiscount = $rateDiscount->discount;
+                $img = $rateProduct->images->first();
+                @endphp
+                <div class="img-box"><img src="site/images/{{ $img->image }}" alt="image" class="img-responsive zoom-img"></div>
                 <div class="info-box">
                     <div class="info-content simpleCart_shelfItem">
-                        <h4>Watches</h4>
+                        <h4>{{ $rateProduct->name }}</h4>
                         <span class="separator"></span>
-                        <p><span class="item_price">$250</span></p>
+                        @if ($raDiscount)
+                        @php
+                        $dis_price = $rateProduct->price * (1 - $raDiscount/100);
+                        @endphp
+                        <p><del>{{ number_format($rateProduct->price) }} {{ trans('messages.$') }}</del>
+                        <span class="item_price">{{ number_format($dis_price) }} {{ trans('messages.$') }}</span></p>
+                        @else
+                        <p><span class="item_price">{{ number_format($rateProduct->price) }} {{ trans('messages.$') }}</span></p>
+                        @endif
                         <span class="separator"></span>
-                        <a class="item_add hvr-outline-out button2" href="#">add to cart </a>
+                        <a class="item_add hvr-outline-out button2" href="#"> {{ trans('messages.add_to_cart') }} </a>
                     </div>
                 </div>
             </div>
@@ -92,11 +137,15 @@
             <div class="img-box"><img src="site/images/p4.jpg" alt="image" class="img-responsive zoom-img"></div>
             <div class="info-box">
                 <div class="info-content simpleCart_shelfItem">
+                    {{-- 
                     <h4>Shoes</h4>
+                    --}}
                     <span class="separator"></span>
+                    {{-- 
                     <p><span class="item_price">$150</span></p>
+                    --}}
                     <span class="separator"></span>
-                    <a class="item_add hvr-outline-out button2" href="#">add to cart </a>
+                    {{-- <a class="item_add hvr-outline-out button2" href="#">add to cart </a> --}}
                 </div>
             </div>
         </div>
@@ -107,551 +156,139 @@
 <!-- product-nav -->
 <div class="product-easy">
     <div class="container">
-        <script src="site/js/easyResponsiveTabs.js" type="text/javascript"></script>
+        <script src="library/bower_site/easyResponsiveTabs.js" type="text/javascript"></script>
         <div class="sap_tabs">
-            <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+            <div id="horizontalTab">
                 <ul class="resp-tabs-list">
-                    <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Latest Designs</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Special Offers</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Collections</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>{{ trans('messages.Latest_Designs') }}</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>{{ trans('messages.Special_Offers') }}</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>{{ trans('messages.Collections') }}</span></li>
                 </ul>
                 <div class="resp-tabs-container">
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/a1.png" alt="" class="pro-image-front">
-                                    <img src="site/images/a1.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Air Tshirt Black</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/a8.png" alt="" class="pro-image-front">
-                                    <img src="site/images/a8.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">1+1 Offer</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Next Blue Blazer</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$99.99</span>
-                                        <del>$109.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/a3.png" alt="" class="pro-image-front">
-                                    <img src="site/images/a3.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Air Tshirt Black </a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$119.99</span>
-                                        <del>$120.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/a4.png" alt="" class="pro-image-front">
-                                    <img src="site/images/a4.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Maroon Puma Tshirt</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$79.99</span>
-                                        <del>$120.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
+                        @foreach($products as $product)
                         <div class="col-md-3 product-men yes-marg">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="site/images/a5.png" alt="" class="pro-image-front">
-                                    <img src="site/images/a5.png" alt="" class="pro-image-back">
+                                    @php
+                                    $image = $product->images->random(1)->first();
+                                    @endphp
+                                    <img src="site/images/{{ $image->image }}" alt="" class="pro-image-front">
+                                    <img src="site/images/{{ $image->image }}" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                            <a href="single.html" class="link-product-add-cart">{{ trans('messages.Quick_View') }}</a>
                                         </div>
                                     </div>
-                                    <span class="product-new-top">Combo Pack</span>
+                                    <span class="product-new-top"> {{ trans('messages.new') }} </span>
                                 </div>
                                 <div class="item-info-product ">
-                                    <h4><a href="single.html">Multicoloured TShirts</a></h4>
+                                    <h4><a href="single.html">{{ $product->name }}</a></h4>
                                     <div class="info-product-price">
-                                        <span class="item_price">$129.99</span>
-                                        <del>$150.71</del>
+                                        @php
+                                        $discount = $product->discount->first();
+                                        $proDiscount = $discount->discount;
+                                        @endphp
+                                        @if ($proDiscount)
+                                        @php
+                                        $price_discount = ($product->price * (1 - $proDiscount/100));
+                                        @endphp
+                                        <span class="item_price"> {{ number_format($price_discount) }} {{ trans('messages.$') }} </span>
+                                        <del>{{ number_format($product->price) }} {{ trans('messages.$') }}</del>
+                                        @else
+                                        <span class="item_price"> {{ number_format($product->price) }} {{ trans('messages.$') }} </span>
+                                        @endif
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>                                    
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 product-men yes-marg">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/a6.png" alt="" class="pro-image-front">
-                                    <img src="site/images/a6.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Air Tshirt Black </a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$129.99</span>
-                                        <del>$150.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men yes-marg">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/a7.png" alt="" class="pro-image-front">
-                                    <img src="site/images/a7.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Dresses</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$129.99</span>
-                                        <del>$150.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men yes-marg">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/a2.png" alt="" class="pro-image-front">
-                                    <img src="site/images/a2.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Wedding Blazers</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$129.99</span>
-                                        <del>$150.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men yes-marg">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/g1.png" alt="" class="pro-image-front">
-                                    <img src="site/images/g1.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Dresses</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men yes-marg">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/g2.png" alt="" class="pro-image-front">
-                                    <img src="site/images/g2.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html"> Shirts</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men yes-marg">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/g3.png" alt="" class="pro-image-front">
-                                    <img src="site/images/g3.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Shirts</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men yes-marg">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/mw2.png" alt="" class="pro-image-front">
-                                    <img src="site/images/mw2.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">T shirts</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                         <div class="clearfix"></div>
+                        <div class="container" align="center">
+                            {{ $products->links() }}
+                        </div>
                     </div>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/w1.png" alt="" class="pro-image-front">
-                                    <img src="site/images/w1.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Wedges</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/w2.png" alt="" class="pro-image-front">
-                                    <img src="site/images/w2.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Sandals</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/mw1.png" alt="" class="pro-image-front">
-                                    <img src="site/images/mw1.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Casual Shoes</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/mw3.png" alt="" class="pro-image-front">
-                                    <img src="site/images/mw3.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Sport Shoes</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
+                        @foreach($listProduct as $product)
                         <div class="col-md-3 product-men yes-marg">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="site/images/ep2.png" alt="" class="pro-image-front">
-                                    <img src="site/images/ep2.png" alt="" class="pro-image-back">
+                                    @php
+                                    $image = $product->images->first();
+                                    @endphp
+                                    <img src="site/images/{{ $image->image }}" alt="" class="pro-image-front">
+                                    <img src="site/images/{{ $image->image }}" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                            <a href="single.html" class="link-product-add-cart">{{ trans('messages.Quick_View') }}</a>
                                         </div>
                                     </div>
-                                    <span class="product-new-top">New</span>
+                                    <span class="product-new-top">{{ trans('messages.new') }}</span>
                                 </div>
                                 <div class="item-info-product ">
-                                    <h4><a href="single.html">Watches</a></h4>
+                                    <h4><a href="single.html">{{ $product->name }}</a></h4>
                                     <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
+                                        @php
+                                        $discount = ($product->discount/100);
+                                        $price_discount = ($product->price * (1 - $discount));
+                                        @endphp
+                                        <span class="item_price">{{ number_format($price_discount) }} {{ trans('messages.$') }}</span>
+                                        <del>{{ number_format($product->price) }} {{ trans('messages.$') }}</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>                                    
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 product-men yes-marg">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/ep3.png" alt="" class="pro-image-front">
-                                    <img src="site/images/ep3.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Watches</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                         <div class="clearfix"></div>
+                        <div class="container" align="center">
+                            {{ $listProduct->links() }}
+                        </div>
                     </div>
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/g1.png" alt="" class="pro-image-front">
-                                    <img src="site/images/g1.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Dresses</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/g2.png" alt="" class="pro-image-front">
-                                    <img src="site/images/g2.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html"> Shirts</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/g3.png" alt="" class="pro-image-front">
-                                    <img src="site/images/g3.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Shirts</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/mw2.png" alt="" class="pro-image-front">
-                                    <img src="site/images/mw2.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">T shirts</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
+                        @foreach($rateProducts as $product)
                         <div class="col-md-3 product-men yes-marg">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="site/images/w4.png" alt="" class="pro-image-front">
-                                    <img src="site/images/w4.png" alt="" class="pro-image-back">
+                                    @php
+                                    $image = $product->images->first();
+                                    @endphp
+                                    <img src="site/images/{{ $image->image }}" alt="" class="pro-image-front">
+                                    <img src="site/images/{{ $image->image }}" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                            <a href="single.html" class="link-product-add-cart">{{ trans('messages.Quick_View') }}</a>
                                         </div>
                                     </div>
-                                    <span class="product-new-top">New</span>
+                                    <span class="product-new-top">{{ trans('messages.new') }}</span>
                                 </div>
                                 <div class="item-info-product ">
-                                    <h4><a href="single.html">Air Tshirt Black Domyos</a></h4>
+                                    <h4><a href="single.html">{{ $product->name }}</a></h4>
                                     <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
+                                        @php
+                                        $discount = $product->discount->first();
+                                        $proDiscount = $discount->discount;
+                                        @endphp
+                                        @if ($proDiscount)
+                                        @php
+                                        $price_discount = ($product->price * (1 - $proDiscount/100));
+                                        @endphp
+                                        <span class="item_price"> {{ number_format($price_discount) }} {{ trans('messages.$') }} </span>
+                                        <del>{{ number_format($product->price) }} {{ trans('messages.$') }}</del>
+                                        @else
+                                        <span class="item_price"> {{ number_format($product->price) }} {{ trans('messages.$') }} </span>
+                                        @endif
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>                                    
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 product-men yes-marg">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="site/images/w3.png" alt="" class="pro-image-front">
-                                    <img src="site/images/w3.png" alt="" class="pro-image-back">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                        </div>
-                                    </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4><a href="single.html">Hand Bags</a></h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
-                                    </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>                                    
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                         <div class="clearfix"></div>
+                        <div class="container" align="center">
+                            {{ $rateProducts->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

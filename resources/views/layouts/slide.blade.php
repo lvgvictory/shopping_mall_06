@@ -4,22 +4,18 @@
         <div class="slide-visual">
             <!-- Slide Image Area (1000 x 424) -->
             <ul class="slide-group">
-                <li><img class="img-responsive" src="site/images/ba1.jpg" alt="Dummy Image" /></li>
-                <li><img class="img-responsive" src="site/images/ba2.jpg" alt="Dummy Image" /></li>
-                <li><img class="img-responsive" src="site/images/ba3.jpg" alt="Dummy Image" /></li>
+                @foreach($slides as $slide)
+                    <li><img class="img-responsive" src="site/images/{{ $slide['image'] }}" alt="Dummy Image" /></li>
+                @endforeach
             </ul>
             <!-- Slide Description Image Area (316 x 328) -->
             <div class="script-wrap">
                 <ul class="script-group">
-                    <li>
-                        <div class="inner-script"><img class="img-responsive" src="site/images/baa1.jpg" alt="Dummy Image" /></div>
-                    </li>
-                    <li>
-                        <div class="inner-script"><img class="img-responsive" src="site/images/baa2.jpg" alt="Dummy Image" /></div>
-                    </li>
-                    <li>
-                        <div class="inner-script"><img class="img-responsive" src="site/images/baa3.jpg" alt="Dummy Image" /></div>
-                    </li>
+                    @foreach($slides1 as $slide)
+                        <li>
+                            <div class="inner-script"><img class="img-responsive" src="site/images/{{ $slide['image'] }}" alt="Dummy Image" /></div>
+                        </li>
+                    @endforeach
                 </ul>
                 <div class="slide-controller">
                     <a href="#" class="btn-prev"><img src="site/images/btn_prev.png" alt="Prev Slide" /></a>
@@ -32,6 +28,6 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    <script type="text/javascript" src="site/js/pignose.layerslider.js"></script>
+    <script type="text/javascript" src="library/bower_site/pignose.layerslider.js"></script>
 </div>
 <!-- //banner -->

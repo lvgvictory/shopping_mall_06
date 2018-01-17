@@ -15,6 +15,11 @@ Route::get('home', function () {
     return view('welcome');
 });
 
+Route::get('home', [
+    'as' => 'home-page', 
+    'uses' => 'HomePageController@getIndex'
+]);
+
 Auth::routes();
 Route::get('logout', 'Admin\AdminController@logout')->name('admin.logout');
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){

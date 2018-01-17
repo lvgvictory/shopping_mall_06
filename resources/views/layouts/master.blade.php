@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Smart Shop a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+        <title>{{ trans('messages.Smart_Shop')}}</title>
         <base href="{{asset('')}}">
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,6 @@
         {{ Html::style('library/bower_site/jquery-ui.css') }}
         {{ Html::style('library/bower_site/flexslider.css') }}
         {{ Html::style('css/myCss.css') }}
-
         <!-- js -->
         {{ Html::script('library/bower_site/jquery-2.1.4.min.js')}}
         {{ Html::script('library/bower_site/imagezoom.js') }}
@@ -40,7 +39,7 @@
         {{ Html::script('library/bower_site/simpleCart.min.js') }}
         <!-- cart -->
         <!-- for bootstrap working -->
-        {{ Html::script('site/js/bootstrap-3.1.1.min.js') }}
+        {{ Html::script('library/bower_site/bootstrap-3.1.1.min.js') }}
         <!-- //for bootstrap working -->
         {{ Html::style('http://fonts.googleapis.com/css?family=Montserrat:400,700') }}
         {{ Html::style('http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic') }}
@@ -57,28 +56,34 @@
             <div class="container">
                 <div class="coupons-grids text-center">
                     <div class="col-md-3 coupons-gd">
-                        <h3>Buy your product in a simple way</h3>
+                        <h3>{{ trans('messages.Buy_your_product_in_a_simple_way') }}</h3>
                     </div>
                     <div class="col-md-3 coupons-gd">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                        <h4>LOGIN TO YOUR ACCOUNT</h4>
+                        <h4>{{ trans('messages.LOGIN_TO_YOUR_ACCOUNT') }}</h4>
+                        {{-- 
                         <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
                             sit amet, consectetur.
                         </p>
+                        --}}
                     </div>
                     <div class="col-md-3 coupons-gd">
                         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                        <h4>SELECT YOUR ITEM</h4>
+                        <h4>{{ trans('messages.SELECT_YOUR_ITEM') }}</h4>
+                        {{-- 
                         <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
                             sit amet, consectetur.
                         </p>
+                        --}}
                     </div>
                     <div class="col-md-3 coupons-gd">
                         <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
-                        <h4>MAKE PAYMENT</h4>
+                        <h4>{{ trans('messages.MAKE_PAYMENT') }}</h4>
+                        {{-- 
                         <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
                             sit amet, consectetur.
                         </p>
+                        --}}
                     </div>
                     <div class="clearfix"> </div>
                 </div>
@@ -90,24 +95,26 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content modal-info">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>                        
                     </div>
                     <div class="modal-body modal-spa">
                         <div class="login-grids">
                             <div class="login">
                                 <div class="login-bottom">
-                                    <h3>Sign up for free</h3>
+                                    <h3>{{ trans('messages.Sign_up_for_free') }}</h3>
                                     <form>
                                         <div class="sign-up">
-                                            <h4>Email :</h4>
+                                            <h4>{{ trans('messages.Email') }} :</h4>
                                             <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required=""> 
                                         </div>
                                         <div class="sign-up">
-                                            <h4>Password :</h4>
+                                            <h4>{{ trans('messages.Password') }} :</h4>
                                             <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
                                         </div>
                                         <div class="sign-up">
-                                            <h4>Re-type Password :</h4>
+                                            <h4>{{ trans('messages.Re-type_Password') }} :</h4>
                                             <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
                                         </div>
                                         <div class="sign-up">
@@ -116,20 +123,20 @@
                                     </form>
                                 </div>
                                 <div class="login-right">
-                                    <h3>Sign in with your account</h3>
+                                    <h3>{{ trans('messages.Sign_in_with_your_account') }}</h3>
                                     <form>
                                         <div class="sign-in">
                                             <h4>Email :</h4>
                                             <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required=""> 
                                         </div>
                                         <div class="sign-in">
-                                            <h4>Password :</h4>
+                                            <h4>{{ trans('messages.Password') }} :</h4>
                                             <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
-                                            <a href="#">Forgot password?</a>
+                                            <a href="#">{{ trans('messages.Forgot_password') }}</a>
                                         </div>
                                         <div class="single-bottom">
                                             <input type="checkbox"  id="brand" value="">
-                                            <label for="brand"><span></span>Remember Me.</label>
+                                            <label for="brand"><span></span>{{ trans('messages.Remember_Me') }}</label>
                                         </div>
                                         <div class="sign-in">
                                             <input type="submit" value="SIGNIN" >
@@ -138,14 +145,12 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <p>By logging in you agree to our <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- //login -->
-
         @yield('script')
     </body>
 </html>
