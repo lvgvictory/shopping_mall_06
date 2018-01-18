@@ -21,11 +21,14 @@
                 <div class="col-md-4 sign-gd">
                     <h4>{{ trans('messages.Information') }}</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ route('home-page') }}">{{ trans('messages.Home') }}</a></li>
                         @foreach($categories as $category)
-                        <li><a href="index.html"> {{ $category->name }} </li>
+                            @php
+                                $sub = $category->subCategories->first();
+                            @endphp
+                        <li><a href="{{ route('mens', $sub->id) }}"> {{ $category->name }} </li>
                         @endforeach
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.html">{{ trans('messages.contact') }}</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 sign-gd-two">

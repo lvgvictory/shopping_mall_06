@@ -68,46 +68,35 @@
                     <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav menu__list">
                             <li class="active menu__item menu__item--current">
-                                <a class="menu__link" href="index.html"> {{ trans('messages.Home') }} <span class="sr-only">({{ trans('messages.current')}})</span></a>
+                                <a class="menu__link" href="{{ route('home-page') }}"> {{ trans('messages.Home') }} <span class="sr-only">({{ trans('messages.current')}})</span></a>
                             </li>
                             @foreach($categories as $category)
-                                <li class="dropdown menu__item">
-                                    <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        {{ $category->name }}
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu multi-column columns-3">
-                                        <div class="row">
-                                            <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-                                                <a href="mens.html"><img src="site/images/{{ $category->avatar }}" alt=" "/></a>
-                                            </div>
-                                            
-                                            <div class="col-sm-3 multi-gd-img">
-                                                <ul class="multi-column-dropdown">
-                                                    @foreach($category->subCategories as $subCate)
-                                                        <li><a href="mens.html">{{ $subCate->name }}</a></li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                            
-                                            {{-- <div class="col-sm-3 multi-gd-img">
-                                                <ul class="multi-column-dropdown">
-                                                    <li><a href="mens.html">Jewellery</a></li>
-                                                    <li><a href="mens.html">Sunglasses</a></li>
-                                                    <li><a href="mens.html">Perfumes</a></li>
-                                                    <li><a href="mens.html">Beauty</a></li>
-                                                    <li><a href="mens.html">Shirts</a></li>
-                                                    <li><a href="mens.html">Sunglasses</a></li>
-                                                    <li><a href="mens.html">Swimwear</a></li>
-                                                </ul>
-                                            </div> --}}
-                                            <div class="clearfix"></div>
+                            <li class="dropdown menu__item">
+                                <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                {{ $category->name }}
+                                <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu multi-column columns-3">
+                                    <div class="row">
+                                        <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
+                                            @php
+                                            $sub = $category->subCategories->first();
+                                            @endphp
+                                            <a href="{{ route('mens', $sub->id) }}"><img src="site/images/{{ $category->avatar }}" alt=" "/></a>
                                         </div>
-                                    </ul>
-                                </li>
+                                        <div class="col-sm-3 multi-gd-img">
+                                            <ul class="multi-column-dropdown">
+                                                @foreach($category->subCategories as $subCate)
+                                                <li><a href="{{ route('mens', $subCate
+                                                    ->id)}}">{{ $subCate->name }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </ul>
+                            </li>
                             @endforeach
-                            {{-- <li class=" menu__item"><a class="menu__link" href="electronics.html">Electronics</a></li>
-                            <li class=" menu__item"><a class="menu__link" href="codes.html">Short Codes</a></li> --}}
                             <li class=" menu__item"><a class="menu__link" href="contact.html">{{ trans('messages.contact')  }}</a></li>
                         </ul>
                     </div>

@@ -20,6 +20,11 @@ Route::get('home', [
     'uses' => 'HomePageController@getIndex'
 ]);
 
+Route::get('mens/{id}', [
+    'as' => 'mens', 
+    'uses' => 'MensController@getIndex'
+]);
+
 Auth::routes();
 Route::get('logout', 'Admin\AdminController@logout')->name('admin.logout');
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){

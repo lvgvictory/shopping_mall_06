@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\Slide;
 use App\Models\Category;
 
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -29,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
 
-        view()->composer(['layouts.header'], function($view){
+        view()->composer(['layouts.header', 'layouts.footer'], function($view){
             $categories = Category::all();
 
             $view->with([
