@@ -57,8 +57,7 @@ class Product extends Model
         $listProduct = $query->join('discounts', 'discount_id', '=', 'discounts.id')
                             ->select('products.*', 'discounts.discount')
                             ->where('discounts.discount', '>', config('custom.defaultDiscount'))
-                            ->orderBy('discounts.discount', 'desc')
-                            ->paginate(config('custom.defaultPage'));
+                            ->orderBy('discounts.discount', 'desc');
         return $listProduct;
     }
 }

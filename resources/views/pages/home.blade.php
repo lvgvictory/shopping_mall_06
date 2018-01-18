@@ -1,3 +1,4 @@
+{{-- {{dd($rateProducts->all())}} --}}
 @extends('layouts.master')
 @section('style')
 {{ Html::style('css/myCss.css')}}
@@ -9,27 +10,8 @@
         <h3><span> {{ trans('messages.arrivals') }} </span></h3>
         <div class="new_grids">
             <div class="col-md-4 new-gd-left">
-                @php
-                $firstProduct = $products->first();
-                $firstDiscount = $firstProduct->discount->first();
-                $fitDiscount = $firstDiscount->discount;
-                $img = $firstProduct->images->first();
-                @endphp
-                <img src="site/images/{{ $img->image }}" alt=" " />
+                <img src="site/images/wed1.jpg" alt=" " />
                 <div class="wed-brand simpleCart_shelfItem">
-                    <h4>{{ $firstProduct->name }}</h4>
-                    @if ($fitDiscount)
-                    @php
-                    $priceDiscount = ($firstProduct->price * (1 - $fitDiscount/100));
-                    @endphp
-                    <h5>{{ trans('messages.Discount') }} {{ $fitDiscount }} {{ trans('messages.%') }} </h5>
-                    <p><i>{{ number_format($firstProduct->price) }} {{ trans('messages.$') }}</i>
-                    <span class="item_price">{{ number_format($priceDiscount) }} {{ trans('messages.$') }}</span>
-                    @else
-                    <span class="item_price"> {{ number_format($firstProduct->price) }} {{ trans('messages.$') }} </span>
-                    @endif
-                    <a class="item_add hvr-outline-out button2" href="#">{{ trans('messages.add_to_cart') }}</a>
-                    </p>
                 </div>
             </div>
             <div class="col-md-4 new-gd-middle">
@@ -71,27 +53,11 @@
     <div class="col-md-7 content-lgrid">
         <div class="col-sm-6 content-img-left text-center">
             <div class="content-grid-effect slow-zoom vertical">
-                @php
-                $disProduct = $listProduct[0];
-                $disDiscount = $disProduct->discount;
-                $img = $disProduct->images;
-                @endphp
-                <div class="img-box"><img src="site/images/{{ $img[0]['image'] }}" alt="image" class="img-responsive zoom-img"></div>
+                <div class="img-box"><img src="site/images/p1.jpg" alt="image" class="img-responsive zoom-img"></div>
                 <div class="info-box">
                     <div class="info-content simpleCart_shelfItem">
-                        <h4>{{ $disProduct->name }}</h4>
                         <span class="separator"></span>
-                        @if ($disDiscount)
-                        @php
-                        $dis_price = $disProduct->price * (1 - $disDiscount/100);
-                        @endphp
-                        <p><del>{{ number_format($disProduct->price) }} {{ trans('messages.$') }}</del>
-                        <span class="item_price">{{ number_format($dis_price) }} {{ trans('messages.$') }}</span></p>
-                        @else
-                        <p><span class="item_price">{{ number_format($disProduct->price) }} {{ trans('messages.$') }}</span></p>
-                        @endif
                         <span class="separator"></span>
-                        <a class="item_add hvr-outline-out button2" href="#"> {{ trans('messages.add_to_cart') }} </a>
                     </div>
                 </div>
             </div>
@@ -104,28 +70,11 @@
         </div>
         <div class="col-sm-6 content-img-left text-center">
             <div class="content-grid-effect slow-zoom vertical">
-                @php
-                $rateProduct = $rateProducts->first();
-                $rateDiscount = $rateProduct->discount;
-                $raDiscount = $rateDiscount->discount;
-                $img = $rateProduct->images->first();
-                @endphp
-                <div class="img-box"><img src="site/images/{{ $img->image }}" alt="image" class="img-responsive zoom-img"></div>
+                <div class="img-box"><img src="site/images/p2.jpg" alt="image" class="img-responsive zoom-img"></div>
                 <div class="info-box">
                     <div class="info-content simpleCart_shelfItem">
-                        <h4>{{ $rateProduct->name }}</h4>
                         <span class="separator"></span>
-                        @if ($raDiscount)
-                        @php
-                        $dis_price = $rateProduct->price * (1 - $raDiscount/100);
-                        @endphp
-                        <p><del>{{ number_format($rateProduct->price) }} {{ trans('messages.$') }}</del>
-                        <span class="item_price">{{ number_format($dis_price) }} {{ trans('messages.$') }}</span></p>
-                        @else
-                        <p><span class="item_price">{{ number_format($rateProduct->price) }} {{ trans('messages.$') }}</span></p>
-                        @endif
                         <span class="separator"></span>
-                        <a class="item_add hvr-outline-out button2" href="#"> {{ trans('messages.add_to_cart') }} </a>
                     </div>
                 </div>
             </div>
@@ -137,15 +86,8 @@
             <div class="img-box"><img src="site/images/p4.jpg" alt="image" class="img-responsive zoom-img"></div>
             <div class="info-box">
                 <div class="info-content simpleCart_shelfItem">
-                    {{-- 
-                    <h4>Shoes</h4>
-                    --}}
                     <span class="separator"></span>
-                    {{-- 
-                    <p><span class="item_price">$150</span></p>
-                    --}}
                     <span class="separator"></span>
-                    {{-- <a class="item_add hvr-outline-out button2" href="#">add to cart </a> --}}
                 </div>
             </div>
         </div>
