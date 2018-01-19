@@ -102,9 +102,15 @@
         <div class="sap_tabs">
             <div id="horizontalTab">
                 <ul class="resp-tabs-list">
-                    <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>{{ trans('messages.Latest_Designs') }}</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>{{ trans('messages.Special_Offers') }}</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>{{ trans('messages.Collections') }}</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-0" role="tab">
+                        <span>{{ trans('messages.Latest_Designs') }}</span>
+                    </li>
+                    <li class="resp-tab-item" aria-controls="tab_item-1" role="tab">
+                        <span>{{ trans('messages.Special_Offers') }}</span>
+                    </li>
+                    <li class="resp-tab-item" aria-controls="tab_item-2" role="tab">
+                        <span>{{ trans('messages.Collections') }}</span>
+                    </li>
                 </ul>
                 <div class="resp-tabs-container">
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
@@ -119,13 +125,15 @@
                                     <img src="site/images/{{ $image->image }}" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">{{ trans('messages.Quick_View') }}</a>
+                                            <a href="{{ route('single', $product->id) }}" class="link-product-add-cart">
+                                                {{ trans('messages.Quick_View') }}
+                                            </a>
                                         </div>
                                     </div>
                                     <span class="product-new-top"> {{ trans('messages.new') }} </span>
                                 </div>
                                 <div class="item-info-product ">
-                                    <h4><a href="single.html">{{ $product->name }}</a></h4>
+                                    <h4><a href="{{ route('single', $product->id) }}">{{ $product->name }}</a></h4>
                                     <div class="info-product-price">
                                         @php
                                         $discount = $product->discount->first();
@@ -141,7 +149,7 @@
                                         <span class="item_price"> {{ number_format($product->price) }} {{ trans('messages.$') }} </span>
                                         @endif
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>                                    
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -163,13 +171,15 @@
                                     <img src="site/images/{{ $image->image }}" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">{{ trans('messages.Quick_View') }}</a>
+                                            <a href="{{ route('single', $product->id) }}" class="link-product-add-cart">
+                                                {{ trans('messages.Quick_View') }}
+                                            </a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">{{ trans('messages.new') }}</span>
                                 </div>
                                 <div class="item-info-product ">
-                                    <h4><a href="single.html">{{ $product->name }}</a></h4>
+                                    <h4><a href="{{ route('single', $product->id) }}">{{ $product->name }}</a></h4>
                                     <div class="info-product-price">
                                         @php
                                         $discount = ($product->discount/100);
@@ -178,7 +188,9 @@
                                         <span class="item_price">{{ number_format($price_discount) }} {{ trans('messages.$') }}</span>
                                         <del>{{ number_format($product->price) }} {{ trans('messages.$') }}</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>                                    
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">
+                                        {{ trans('messages.add_to_cart') }}
+                                    </a>                                    
                                 </div>
                             </div>
                         </div>
@@ -200,13 +212,15 @@
                                     <img src="site/images/{{ $image->image }}" alt="" class="pro-image-back">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">{{ trans('messages.Quick_View') }}</a>
+                                            <a href="{{ route('single', $product->id) }}" class="link-product-add-cart">
+                                                {{ trans('messages.Quick_View') }}
+                                            </a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">{{ trans('messages.new') }}</span>
                                 </div>
                                 <div class="item-info-product ">
-                                    <h4><a href="single.html">{{ $product->name }}</a></h4>
+                                    <h4><a href="{{ route('single', $product->id) }}">{{ $product->name }}</a></h4>
                                     <div class="info-product-price">
                                         @php
                                         $discount = $product->discount->first();
@@ -222,7 +236,7 @@
                                         <span class="item_price"> {{ number_format($product->price) }} {{ trans('messages.$') }} </span>
                                         @endif
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>                                    
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>
                                 </div>
                             </div>
                         </div>

@@ -23,7 +23,7 @@
                     </li>
                 </ul>
                 <!---->
-                <script type="text/javascript" src="site/js/jquery-ui.js"></script>
+                {{ Html::script('library/bower_site/jquery-ui.js') }}
                 <!---->
             </div>
             <div class="css-treeview">
@@ -34,7 +34,7 @@
                         <ul>
                             @foreach ($categories as $subCate)
                             <li>
-                                <li><a href="{{ route('mens', $subCate->id) }}">{{ $subCate->name }}</a></li>
+                            <li><a href="{{ route('mens', $subCate->id) }}">{{ $subCate->name }}</a></li>
                             </li>
                             @endforeach
                         </ul>
@@ -47,7 +47,9 @@
                     <form>
                         <div class="check_box">
                             <div class="radio">
-                                <label><input type="radio" name="radio" checked=""><i></i>{{ trans('messages.More_convenient_for_shipping_and_delivery') }}</label>
+                                <label>
+                                <input type="radio" name="radio" checked=""><i></i>{{ trans('messages.More_convenient_for_shipping_and_delivery') }}
+                                </label>
                             </div>
                         </div>
                         <div class="check_box">
@@ -94,17 +96,17 @@
                 <div class="sorting">
                     <h6>{{ trans('messages.Showing') }}</h6>
                     <select id="country2" onchange="change_country(this.value)" class="frm-field required sect">
-                        <option value="null">{{ trans('messages.7') }}</option>
-                        <option value="null">{{ trans('messages.14') }}</option>
-                        <option value="null">{{ trans('messages.28') }}</option>
-                        <option value="null">{{ trans('messages.35') }}</option>
+                        <option value="null">{{ trans('messages.product_7') }}</option>
+                        <option value="null">{{ trans('messages.product_14') }}</option>
+                        <option value="null">{{ trans('messages.product_28') }}</option>
+                        <option value="null">{{ trans('messages.product_35') }}</option>
                     </select>
                     <div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="men-wear-top">
-                <script src="site/js/responsiveslides.min.js"></script>
+                {{ Html::script('library/bower_site/easyResponsiveTabs.js') }}
                 <div  id="top" class="callbacks_container">
                     <ul class="rslides" id="slider3">
                         @foreach ($slide as $sl)
@@ -136,27 +138,27 @@
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
                         @php
-                            $img = $product->images->first();
+                        $img = $product->images->first();
                         @endphp
                         <img src="site/images/{{ $img->image }}" alt="" class="pro-image-front">
                         <img src="site/images/{{ $img->image }}" alt="" class="pro-image-back">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
-                                <a href="single.html" class="link-product-add-cart">{{ trans('messages.Quick_View') }}</a>
+                                <a href="{{ route('single', $product->id) }}" class="link-product-add-cart">{{ trans('messages.Quick_View') }}</a>
                             </div>
                         </div>
                         <span class="product-new-top">{{ trans('messages.new') }}</span>
                     </div>
                     <div class="item-info-product ">
-                        <h4><a href="single.html">{{ $product->name }}</a></h4>
+                        <h4><a href="{{ route('single', $product->id) }}">{{ $product->name }}</a></h4>
                         @php
-                            $discount = $product->discount;
-                            $dis = $discount->discount;
+                        $discount = $product->discount;
+                        $dis = $discount->discount;
                         @endphp
                         <div class="info-product-price">
                             @if ($dis)
                             @php
-                                $price_discount = $product->price * (1 - $dis/100);
+                            $price_discount = $product->price * (1 - $dis/100);
                             @endphp
                             <span class="item_price">{{ number_format($price_discount) }} {{ trans('messages.$') }}</span>
                             <del>{{ number_format($product->price) }} {{ trans('messages.$') }}</del>
@@ -164,7 +166,7 @@
                             <span class="item_price">{{ number_format($product->price) }} {{ trans('messages.$') }}</span>
                             @endif
                         </div>
-                        <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>                                    
+                        <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>
                     </div>
                 </div>
             </div>

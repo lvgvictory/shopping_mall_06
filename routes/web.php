@@ -25,6 +25,11 @@ Route::get('mens/{id}', [
     'uses' => 'MensController@getIndex'
 ]);
 
+Route::get('single/{id}', [
+    'as' => 'single', 
+    'uses' => 'SingleController@getIndex'
+]);
+
 Auth::routes();
 Route::get('logout', 'Admin\AdminController@logout')->name('admin.logout');
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
