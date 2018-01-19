@@ -31,9 +31,12 @@ Route::get('single/{id}', [
 ]);
 
 Auth::routes();
+
 Route::get('logout', 'Admin\AdminController@logout')->name('admin.logout');
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 Route::get('dashbroad', 'Admin\AdminController@index')->name('dashbroad')
 ;
 Route::get('user', 'Admin\UserController@getUser')->name('user');
+
+Route::resource('category', 'Admin\CategoryController');
 });
