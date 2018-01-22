@@ -32,11 +32,13 @@
                     <li>
                         <input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><span></span>{{ $cate->name }}</label>
                         <ul>
+                            @if (isset($categories))
                             @foreach ($categories as $subCate)
                             <li>
                             <li><a href="{{ route('mens', $subCate->id) }}">{{ $subCate->name }}</a></li>
                             </li>
                             @endforeach
+                            @endif
                         </ul>
                     </li>
                 </ul>
@@ -166,7 +168,7 @@
                             <span class="item_price">{{ number_format($product->price) }} {{ trans('messages.$') }}</span>
                             @endif
                         </div>
-                        <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>
+                        <a href="" class="item_add single-item hvr-outline-out button2 add_cart_button" itemID="{{ $product->id }}">{{ trans('messages.add_to_cart') }}</a>
                     </div>
                 </div>
             </div>

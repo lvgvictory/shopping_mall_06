@@ -3,115 +3,58 @@
 <!-- banner -->
 <div class="page-head">
     <div class="container">
-        <h3>Check Out</h3>
+        <h3>{{ trans('messages.Check_Out') }}</h3>
     </div>
 </div>
 <!-- //banner -->
 <!-- check out -->
 <div class="checkout">
     <div class="container">
-        <h3>My Shopping Bag</h3>
+        <h3>{{ trans('messages.My_Shopping_Bag') }}</h3>
         <div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
             <table class="timetable_sub">
                 <thead>
                     <tr>
-                        <th>Remove</th>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
+                        <th>{{ trans('messages.Remove') }}</th>
+                        <th>{{ trans('messages.Image') }}</th>
+                        <th>{{ trans('messages.Quality') }}</th>
+                        <th>{{ trans('messages.Product_Name') }}</th>
+                        <th>{{ trans('messages.Price') }}</th>
+                        <th>{{ trans('messages.Total') }}</th>
                     </tr>
                 </thead>
+                @foreach ($content as $key => $item)
                 <tr class="rem1">
                     <td class="invert-closeb">
                         <div class="rem">
-                            <div class="close1"> </div>
+                            <a  idCart="{{ $key }}" class="delete-product"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
                         </div>
                     </td>
-                    <td class="invert-image"><a href="single.html"><img src="site/images/w4.png" alt=" " class="img-responsive" /></a></td>
+                    <td class="invert-image"><a href="single.html"><img src="site/images/{{ $item->options->img }}" alt=" " class="img-responsive" /></a></td>
                     <td class="invert">
                         <div class="quantity">
                             <div class="quantity-select">
                                 <div class="entry value-minus">&nbsp;</div>
-                                <div class="entry value"><span>1</span></div>
+                                <div class="entry value"><span>{{ $item->qty }}</span></div>
                                 <div class="entry value-plus active">&nbsp;</div>
                             </div>
                         </div>
                     </td>
-                    <td class="invert">Hand Bag</td>
-                    <td class="invert">$45.99</td>
+                    <td class="invert">{{ $item->name }}</td>
+                    <td class="invert item_price">{{ number_format($item->price, 0, ",", ".") }}{{ trans('messages.$') }}</td>
+                    <td class="invert item_total_price">{{ number_format($item->price, 0, ",", ".") * $item->qty }}{{ trans('messages.$') }}</td>
                 </tr>
-                <tr class="rem2">
-                    <td class="invert-closeb">
-                        <div class="rem">
-                            <div class="close2"> </div>
-                        </div>
-                    </td>
-                    <td class="invert-image"><a href="single.html"><img src="site/images/ep3.png" alt=" " class="img-responsive" /></a></td>
-                    <td class="invert">
-                        <div class="quantity">
-                            <div class="quantity-select">
-                                <div class="entry value-minus">&nbsp;</div>
-                                <div class="entry value"><span>1</span></div>
-                                <div class="entry value-plus active">&nbsp;</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="invert">Watches</td>
-                    <td class="invert">$45.99</td>
-                </tr>
-                <tr class="rem3">
-                    <td class="invert-closeb">
-                        <div class="rem">
-                            <div class="close3"> </div>
-                        </div>
-                    </td>
-                    <td class="invert-image"><a href="single.html"><img src="site/images/w2.png" alt=" " class="img-responsive" /></a></td>
-                    <td class="invert">
-                        <div class="quantity">
-                            <div class="quantity-select">
-                                <div class="entry value-minus">&nbsp;</div>
-                                <div class="entry value"><span>1</span></div>
-                                <div class="entry value-plus active">&nbsp;</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="invert">Sandals</td>
-                    <td class="invert">$45.99</td>
-                </tr>
-                <tr class="rem4">
-                    <td class="invert-closeb">
-                        <div class="rem">
-                            <div class="close4"> </div>
-                        </div>
-                    </td>
-                    <td class="invert-image"><a href="single.html"><img src="site/images/w1.png" alt=" " class="img-responsive" /></a></td>
-                    <td class="invert">
-                        <div class="quantity">
-                            <div class="quantity-select">
-                                <div class="entry value-minus">&nbsp;</div>
-                                <div class="entry value"><span>1</span></div>
-                                <div class="entry value-plus active">&nbsp;</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="invert">Wedges</td>
-                    <td class="invert">$45.99</td>
-                </tr>
+                @endforeach
             </table>
         </div>
         <div class="checkout-left">
             <div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
-                <a href="mens.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Back To Shopping</a>
+                <a href="{{ route('home-page')}}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>{{ trans('messages.Back_To_Shopping') }}</a>
             </div>
             <div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
-                <h4>Shopping basket</h4>
+                <h4>{{ trans('messages.Shopping_basket')}}</h4>
                 <ul>
-                    <li>Hand Bag <i>-</i> <span>$45.99</span></li>
-                    <li>Watches <i>-</i> <span>$45.99</span></li>
-                    <li>Sandals <i>-</i> <span>$45.99</span></li>
-                    <li>Wedges <i>-</i> <span>$45.99</span></li>
-                    <li>Total <i>-</i> <span>$183.96</span></li>
+                    <li class="total_price">{{ trans('messages.Total_price')}} <i>:</i> <span>{{ $total }}</span></li>
                 </ul>
             </div>
             <div class="clearfix"> </div>

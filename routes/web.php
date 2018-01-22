@@ -30,6 +30,32 @@ Route::get('single/{id}', [
     'uses' => 'SingleController@getIndex'
 ]);
 
+Route::get('show-cart', [
+    'as' => 'showcart', 
+    'uses' => 'CartController@showCart'
+]);
+
+Route::get('get-cart', [
+    'as' => 'getcart', 
+    'uses' => 'HomePageController@getCart'
+]);
+
+
+Route::get('del-cart', [
+    'as' => 'delcart', 
+    'uses' => 'CartController@delCart'
+]);
+
+Route::get('add-cart', [
+    'as' => 'addcart', 
+    'uses' => 'HomePageController@addCart'
+]);
+
+Route::get('update-cart', [
+    'as' => 'updatecart', 
+    'uses' => 'CartController@updateCart'
+]);
+
 Auth::routes();
 
 Route::get('logout', 'Admin\AdminController@logout')->name('admin.logout');

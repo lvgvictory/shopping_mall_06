@@ -1,6 +1,6 @@
 .fixNav{
     width: 100%;
-    position: fixed; 
+    position: fixed;
     top: 0; 
     left: 0; 
     z-index: 100000000;
@@ -21,11 +21,15 @@
 .single .slideInRight1{
     visibility: visible;
     animation-delay: 0.5s;
-    animation-name: slideInRight;    
+    animation-name: slideInRight;
 }
 
 #horizontalTab{
     display: block;
     width: 100%;
     margin: 0px;
+}
+
+#toast-container{
+    margin-top: 80px !important;
 }

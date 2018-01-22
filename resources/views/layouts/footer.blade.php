@@ -13,7 +13,7 @@
             <div class="col-sm-6 newsright">
                 <form>
                     <input type="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="{{ trans('messages.Submit') }}">
                 </form>
             </div>
             <div class="clearfix"></div>
@@ -22,12 +22,14 @@
                     <h4>{{ trans('messages.Information') }}</h4>
                     <ul>
                         <li><a href="{{ route('home-page') }}">{{ trans('messages.Home') }}</a></li>
-                        @foreach($categories as $category)
-                            @php
-                                $sub = $category->subCategories->first();
-                            @endphp
-                        <li><a href="{{ route('mens', $sub->id) }}"> {{ $category->name }} </li>
-                        @endforeach
+                        @if (isset($categories))
+                            @foreach($categories as $category)
+                                @php
+                                    $sub = $category->subCategories->first();
+                                @endphp
+                            <li><a href="{{ route('mens', $sub->id) }}"> {{ $category->name }} </li>
+                            @endforeach
+                        @endif
                         <li><a href="contact.html">{{ trans('messages.contact') }}</a></li>
                     </ul>
                 </div>

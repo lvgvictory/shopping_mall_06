@@ -24,9 +24,11 @@
                 </div>
                 <div class="section_room">
                     <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                        @foreach($categories as $category)
-                        <option value="{{ $category->id }}"> {{ $category->name }} </option>
-                        @endforeach
+                        @if (isset($categories))
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
                 <div class="sear-sub">
@@ -70,33 +72,35 @@
                             <li class="active menu__item menu__item--current">
                                 <a class="menu__link" href="{{ route('home-page') }}"> {{ trans('messages.Home') }} <span class="sr-only">({{ trans('messages.current')}})</span></a>
                             </li>
-                            @foreach($categories as $category)
-                            <li class="dropdown menu__item">
-                                <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                {{ $category->name }}
-                                <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu multi-column columns-3">
-                                    <div class="row">
-                                        <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-                                            @php
-                                            $sub = $category->subCategories->first();
-                                            @endphp
-                                            <a href="{{ route('mens', $sub->id) }}"><img src="site/images/{{ $category->avatar }}" alt=" "/></a>
+                            @if (isset($categories))
+                                @foreach($categories as $category)
+                                <li class="dropdown menu__item">
+                                    <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    {{ $category->name }}
+                                    <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu multi-column columns-3">
+                                        <div class="row">
+                                            <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
+                                                @php
+                                                $sub = $category->subCategories->first();
+                                                @endphp
+                                                <a href="{{ route('mens', $sub->id) }}"><img src="site/images/{{ $category->avatar }}" alt=" "/></a>
+                                            </div>
+                                            <div class="col-sm-3 multi-gd-img">
+                                                <ul class="multi-column-dropdown">
+                                                    @foreach($category->subCategories as $subCate)
+                                                    <li><a href="{{ route('mens', $subCate
+                                                        ->id)}}">{{ $subCate->name }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <div class="clearfix"></div>
                                         </div>
-                                        <div class="col-sm-3 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                @foreach($category->subCategories as $subCate)
-                                                <li><a href="{{ route('mens', $subCate
-                                                    ->id)}}">{{ $subCate->name }}</a></li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </ul>
-                            </li>
-                            @endforeach
+                                    </ul>
+                                </li>
+                                @endforeach
+                            @endif
                             <li class=" menu__item"><a class="menu__link" href="contact.html">{{ trans('messages.contact')  }}</a></li>
                         </ul>
                     </div>
@@ -105,11 +109,11 @@
         </div>
         <div class="top_nav_right">
             <div class="cart box_1">
-                <a href="checkout.html">
+                <a href="{{ route('showcart')}}">
                     <h3>
                         <div class="total">
                             <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-                            <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> {{ trans('messages.items') }})
+                            <span class="home_cart_total"></span> (<span id="" class="home_count_cart"></span> {{ trans('messages.items') }})
                         </div>
                     </h3>
                 </a>
