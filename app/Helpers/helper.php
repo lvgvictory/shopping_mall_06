@@ -1,5 +1,7 @@
 <?php
 namespace App\Helpers;
+use Cart;
+
 class Helper
 {
     public static function upload($file, $path)
@@ -16,5 +18,17 @@ class Helper
             Log::error($e);
             return false;
         }
+    }
+
+    public static function customTotal()
+    {
+        $carts = Cart::content();
+        $total = 0;
+        
+        foreach ($carts as $cart) {
+            $total += $cart->price * $cart->qty;
+        }
+        
+        return $total;
     }
 }

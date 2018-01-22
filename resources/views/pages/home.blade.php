@@ -1,4 +1,3 @@
-{{-- {{dd($rateProducts->all())}} --}}
 @extends('layouts.master')
 @section('style')
 {{ Html::style('css/myCss.css')}}
@@ -119,7 +118,7 @@
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
                                     @php
-                                    $image = $product->images->random(1)->first();
+                                    $image = $product->images->first();
                                     @endphp
                                     <img src="site/images/{{ $image->image }}" alt="" class="pro-image-front">
                                     <img src="site/images/{{ $image->image }}" alt="" class="pro-image-back">
@@ -149,7 +148,7 @@
                                         <span class="item_price"> {{ number_format($product->price) }} {{ trans('messages.$') }} </span>
                                         @endif
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>
+                                    <a href="" class="item_add single-item hvr-outline-out button2 add_cart_button" itemID="{{ $product->id }}">{{ trans('messages.add_to_cart') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -188,9 +187,7 @@
                                         <span class="item_price">{{ number_format($price_discount) }} {{ trans('messages.$') }}</span>
                                         <del>{{ number_format($product->price) }} {{ trans('messages.$') }}</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">
-                                        {{ trans('messages.add_to_cart') }}
-                                    </a>                                    
+                                    <a href="" class="item_add single-item hvr-outline-out button2 add_cart_button" itemID="{{ $product->id }}">{{ trans('messages.add_to_cart') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +233,7 @@
                                         <span class="item_price"> {{ number_format($product->price) }} {{ trans('messages.$') }} </span>
                                         @endif
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>
+                                    <a href="" class="item_add single-item hvr-outline-out button2 add_cart_button" itemID="{{ $product->id }}">{{ trans('messages.add_to_cart') }}</a>
                                 </div>
                             </div>
                         </div>

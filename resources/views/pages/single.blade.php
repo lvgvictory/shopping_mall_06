@@ -58,18 +58,6 @@
                 </span>
             </div>
             <br>
-            <div class="color-quality">
-                <div class="color-quality-right">
-                    <h5>{{ trans('messages.Quality') }} :</h5>
-                    <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-                        <option value="{{ trans('messages.qualtity_1') }}"> {{ trans('messages.qualtity_1') }} </option>
-                        <option value="{{ trans('messages.qualtity_2') }}"> {{ trans('messages.qualtity_2') }} </option> 
-                        <option value="{{ trans('messages.qualtity_3') }}"> {{ trans('messages.qualtity_3') }} </option>                 
-                        <option value="{{ trans('messages.qualtity_4') }}"> {{ trans('messages.qualtity_4') }} </option>
-                        <option value="{{ trans('messages.qualtity_5') }}"> {{ trans('messages.qualtity_5') }} </option>
-                    </select>
-                </div>
-            </div>
             <div class="occasional">
                 <h5>{{ trans('messages.Types') }}</h5>
                 @foreach ($productSize as $ps)
@@ -83,7 +71,7 @@
                 <div class="clearfix"> </div>
             </div>
             <div class="occasion-cart">
-                <a href="#" class="item_add hvr-outline-out button2">{{ trans('messages.add_to_cart') }}</a>
+                <a href="" class="item_add single-item hvr-outline-out button2 add_cart_button" itemID="{{ $product->id }}">{{ trans('messages.add_to_cart') }}</a>
             </div>
         </div>
         <div class="clearfix"> </div>
