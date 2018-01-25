@@ -18,7 +18,7 @@ class AdminController extends Controller
     {
         if (Auth::check()) {
             Auth::logout();
-            return redirect('login');
+            return redirect()->route('home-page');
         }
     }
 }

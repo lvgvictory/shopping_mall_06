@@ -24,11 +24,11 @@ class Helper
     {
         $carts = Cart::content();
         $total = 0;
-        
+
         foreach ($carts as $cart) {
             $total += $cart->price * $cart->qty;
         }
-        
+
         return $total;
     }
 }

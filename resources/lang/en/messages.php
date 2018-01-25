@@ -20,7 +20,7 @@ return [
     'LOGIN_TO_YOUR_ACCOUNT' => 'LOGIN TO YOUR ACCOUNT',
     'SELECT_YOUR_ITEM' => 'SELECTS YOUR ITEM',
     'MAKE_PAYMENT' => 'MAKE PAYMENT',
-    'Sign_up_for_free' => 'Sign up for free'
+    'Sign_up_for_free' => 'Sign up for free',
     'Email' => 'Email',
     'Password' => 'Password',
     'Re-type_Password' => 'Re-type Password',
@@ -79,7 +79,7 @@ return [
     'product_28' => '28',
     'product_35' => '35',
     'Exclusive_Mens_Collections' => 'Exclusive Mens Collections',
-    'text_1' => 'Video bóng đá - Kết quả bóng đá, U23 Việt Nam - U23 Syria, 
+    'text_1' => 'Video bóng đá - Kết quả bóng đá, U23 Việt Nam - U23 Syria,
                 vòng bảng VCK U23 châu Á 2018) U23 Việt Nam đã chơi một trận đấu cực kỳ quả cảm lẫn may mắn để vào tứ kết',
     'Single' => 'Single',
     'Description' => 'Description',

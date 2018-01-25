@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\SubCategory;
+use App\Models\Category;
 
 class SubCategoryController extends Controller
 {
@@ -15,9 +16,9 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $subCategories = SubCategory::paginate(5);
+        $subCategories = SubCategory::orderBy('id', 'desc')->paginate(config('custom.elementPage'));
 
-        return view('admin.pages.subcategories.list', compact('subcategories'));
+        return view('admin.pages.subcategories.list', compact('subCategories'));
     }
 
     /**
@@ -27,8 +28,9 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
+        $category = Category::all();
 
-        return view('admin.pages.subcategories.add');
+        return view('admin.pages.subcategories.add', compact('category'));
     }
 
     /**
@@ -39,7 +41,17 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $subCategories = new SubCategory();
+        $subCategories->category_id = $request->categoryId;
+        $subCategories->name = $request->nameSub;
+        $subCategories->save();
+
+        $notification = [
+            'message' => trans('message.add_sussuces'),
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('sub-category.index')->with($notification);
     }
 
     /**
@@ -61,7 +73,14 @@ class SubCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (isset($id)) {
+            $editSubCate = SubCategory::find($id);
+            $cate = Category::find($editSubCate->category_id);
+
+            return view('admin.pages.subcategories.edit', compact('editSubCate', 'cate'));
+        } else {
+            App::abort(404);
+        }
     }
 
     /**
@@ -73,7 +92,19 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $subCategories = SubCategory::find($id);
+            $subCategories->name = $request->nameSub;
+            $subCategories->update();
+            $notification = [
+                'message' => trans('message.edit_sussuces'),
+                'alert-type' => 'success'
+            ];
+
+            return redirect()->route('sub-category.index')->with($notification);
+        } catch (Exception $e) {
+            App::abort(404);
+        }
     }
 
     /**
@@ -84,6 +115,19 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (isset($id)) {
+            $deleteSubCate = SubCategory::find($id);
+            $deleteSubCate->delete();
+            $notification = array(
+                'message' => trans('message.delete_sussuces'),
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('sub-category.index')->with($notification);
+        } else {
+            App::abort(404);
+        }
+
+
     }
 }

@@ -11,22 +11,22 @@
 |
 */
 
-Route::get('home', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('home', [
-    'as' => 'home-page', 
+    'as' => 'home-page',
     'uses' => 'HomePageController@getIndex'
 ]);
 
 Route::get('mens/{id}', [
-    'as' => 'mens', 
+    'as' => 'mens',
     'uses' => 'MensController@getIndex'
 ]);
 
 Route::get('single/{id}', [
-    'as' => 'single', 
+    'as' => 'single',
     'uses' => 'SingleController@getIndex'
 ]);
 
@@ -63,6 +63,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 Route::get('dashbroad', 'Admin\AdminController@index')->name('dashbroad')
 ;
 Route::get('user', 'Admin\UserController@getUser')->name('user');
+Route::get('errors', 'Admin\UserController@getUser')->name('user');
 
 Route::resource('category', 'Admin\CategoryController');
+Route::resource('sub-category', 'Admin\SubCategoryController');
 });

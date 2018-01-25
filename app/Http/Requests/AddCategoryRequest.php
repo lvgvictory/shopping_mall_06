@@ -25,6 +25,7 @@ class AddCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:categories|max:255',
+            'image' => 'mimes:jpeg,bmp,png,jpg',
         ];
     }
 }
