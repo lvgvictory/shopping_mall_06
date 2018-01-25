@@ -18,8 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(5);
-
+        $categories = Category::orderBy('id', 'desc')->paginate(config('custom.elementPage'));
         return view('admin.pages.categories.list', compact('categories'));
     }
 
@@ -45,18 +44,18 @@ class CategoryController extends Controller
         try {
             $category = new Category();
             $filename = helper::upload($request->file('image'), config('custom.defaultPath'));
-            $category->imgs = $filename;
+            $category->avatar = $filename;
             $category->name = $request->name;
             $category->save();
 
             $notification = [
-                'message' => 'you add successful!',
-                'alert-type' => 'success'
+                'message' => trans('message.add_sussuces'),
+                'alert-type' => 'success',
             ];
 
             return redirect()->route('category.index')->with($notification);
         } catch (Exception $e) {
-            echo $e->get_message();
+            return $e->get_message();
         }
 
     }
@@ -80,9 +79,13 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $editCate = Category::find($id);
+        if (isset($id)) {
+            $editCate = Category::find($id);
+            return view('admin.pages.categories.edit', compact('editCate'));
+        } else {
+            App::abort(404);
+        }
 
-        return view('admin.pages.categories.edit', compact('editCate'));
     }
 
     /**
@@ -95,23 +98,23 @@ class CategoryController extends Controller
     public function update(EditCategoryRequest $request, $id)
     {
         try {
-            $category = Category::find($id);
+            $category = Category::findOrFail($id);
 
             if ($request->hasFile('image')) {
                 $filename = helper::upload($request->file('image'), config('custom.defaultPath'));
-                $category->imgs = $filename;
+                $category->avatar = $filename;
             }
 
             $category->name = $request->name;
             $category->update();
-            $notification = array(
-                'message' => 'you update successful!',
+            $notification = [
+                'message' => trans('message.edit_sussuces'),
                 'alert-type' => 'success'
-            );
+            ];
 
             return redirect()->route('category.index')->with($notification);
         } catch (Exception $e) {
-            echo $e->get_message();
+            App::abort(404);
         }
     }
 
@@ -123,13 +126,18 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $deleteCate = Category::find($id);
-        $deleteCate->delete();
-        $notification = array(
-            'message' => 'you delete successful!',
+        if (isset($id)) {
+            $deleteCate = Category::findOrFail($id);
+            $deleteCate->delete();
+            $notification = [
+            'message' => trans('message.delete_sussuces'),
             'alert-type' => 'success'
-        );
+            ];
 
-        return redirect()->route('category.index')->with($notification);
+            return redirect()->route('category.index')->with($notification);
+        } else {
+            App::abort(404);
+        }
+
     }
 }

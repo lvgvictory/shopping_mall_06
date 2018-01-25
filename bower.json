@@ -17,7 +17,7 @@
   "dependencies": {
     "jquery": "^3.2.1",
     "bootstrap": "^3.3.7",
-    "bower_site": "*",
+    "bower_site": "https://github.com/lvgvictory/bower_site.git",
     "Ionicons": "https://github.com/thanhkhuatdac/ionicons.git",
     "boostrap": "https://github.com/thanhkhuatdac/boostrap-4.0.2.git",
     "font-awesome": "https://github.com/FortAwesome/Font-Awesome.git#^4.7.0",
