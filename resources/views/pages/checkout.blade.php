@@ -48,9 +48,9 @@
             </table>
         </div>
         <div class="checkout-left">
-            <div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
+            {{-- <div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
                 <a href="{{ route('home-page')}}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>{{ trans('messages.Back_To_Shopping') }}</a>
-            </div>
+            </div> --}}
             <div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
                 <h4>{{ trans('messages.Shopping_basket')}}</h4>
                 <ul>
@@ -58,6 +58,64 @@
                 </ul>
             </div>
             <div class="clearfix"> </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div align="center">ĐẠT HÀNG</div>
+            <div class="col-sm-8 col-sm-push-2">
+                <form action="{{ route('checkout') }}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    @if(count($errors) > 0)
+                    <div class="alert alert-danger">
+                        {{-- @foreach($errors->all() as $err)
+                            {{ $err }}
+                        @endforeach --}}
+                        {{ $errors->first() }}
+                    </div>
+                    @endif
+                    @if (Session::has('thongbao'))
+                    <div class="row alert alert-success"> {{Session::get('thongbao')}} </div>
+                    @endif
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">Họ Tên: </label>
+                    @if (isset(Auth()->user()->name))
+                    <input name="id" type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ Auth()->user()->id }}">
+                    <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Họ tên" value="{{ Auth()->user()->name }}">
+                    @else
+                    <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Họ tên" value="{{ old('name') }}">
+                    @endif
+                    </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email: </label>
+                    @if (isset(Auth()->user()->email))
+                    <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="{{ Auth()->user()->email }}">
+                    @else
+                    <input id="check_mail" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="{{ old('email') }}">
+                    <div class="result_email"></div>
+                    @endif
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Địa chỉ: </label>
+                    @if (isset(Auth()->user()->address))
+                    <input name="address" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Địa chỉ" value="{{ Auth()->user()->address }}">
+                    @else
+                    <input name="address" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Địa chỉ" value="{{ old('address') }}">
+                    @endif
+                  </div><div class="form-group">
+                    <label for="exampleInputEmail1">SĐT: </label>
+                    @if (isset(Auth()->user()->phone))
+                    <input name="phone" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Số điện thoại" value="{{ Auth()->user()->phone }}">
+                    @else
+                    <input name="phone" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Số điện thoại" value="{{ old('phone') }}">
+                    @endif
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleTextarea">Ghi chú: </label>
+                    <textarea name="message" class="form-control" id="exampleTextarea" rows="3"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Đặt Hàng</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

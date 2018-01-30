@@ -73,7 +73,7 @@ $(document).ready(function () {
                     toastr.warning('Product was removed!');
                 }
             }
-        });       
+        });
     });
 
     $('.entry').click(function (e) {
@@ -93,6 +93,26 @@ $(document).ready(function () {
                 });
                 getCart();
                 toastr.success('Product Successfully!');
+            }
+        });
+    });
+
+    $('#check_mail').blur(function() {
+        var check_mail = $(this).val();
+        $.ajax({
+            url: '/check-email',
+            type: 'GET',
+            data: {check_mail: check_mail},
+            success: function ($res) {
+                if ($res) {
+                    let str = "Email đã tồn tại vui lòng đăng nhập <a href='/login'> Đăng Nhập </a>";
+                    $('.result_email').html(str);
+                    $('.result_email').css('color', 'pink');
+                } else {
+                    let str = 'Email hợp lệ';
+                    $('.result_email').html(str);
+                    $('.result_email').css('color', 'green');
+                }
             }
         });
     });

@@ -12,7 +12,8 @@ class CartController extends Controller
     public function showCart()
     {
         $content = Cart::content();
-        $total = helper::customTotal(); 
+        //$total = helper::customTotal();
+        $total = Cart::subtotal(3);
 
         return view('pages.checkout', compact([
             'content',

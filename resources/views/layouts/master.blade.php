@@ -14,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="Smart Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
             Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
             function hideURLbar(){ window.scrollTo(0,1); } 
         </script>
@@ -78,67 +79,6 @@
             </div>
         </div>
         @include('layouts.footer')
-        <!-- login -->
-        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content modal-info">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>                        
-                    </div>
-                    <div class="modal-body modal-spa">
-                        <div class="login-grids">
-                            <div class="login">
-                                <div class="login-bottom">
-                                    <h3>{{ trans('messages.Sign_up_for_free') }}</h3>
-                                    <form>
-                                        <div class="sign-up">
-                                            <h4>{{ trans('messages.Email') }} :</h4>
-                                            <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required=""> 
-                                        </div>
-                                        <div class="sign-up">
-                                            <h4>{{ trans('messages.Password') }} :</h4>
-                                            <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
-                                        </div>
-                                        <div class="sign-up">
-                                            <h4>{{ trans('messages.Re-type_Password') }} :</h4>
-                                            <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
-                                        </div>
-                                        <div class="sign-up">
-                                            <input type="submit" value="REGISTER NOW" >
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="login-right">
-                                    <h3>{{ trans('messages.Sign_in_with_your_account') }}</h3>
-                                    <form>
-                                        <div class="sign-in">
-                                            <h4>Email :</h4>
-                                            <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required=""> 
-                                        </div>
-                                        <div class="sign-in">
-                                            <h4>{{ trans('messages.Password') }} :</h4>
-                                            <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
-                                            <a href="#">{{ trans('messages.Forgot_password') }}</a>
-                                        </div>
-                                        <div class="single-bottom">
-                                            <input type="checkbox"  id="brand" value="">
-                                            <label for="brand"><span></span>{{ trans('messages.Remember_Me') }}</label>
-                                        </div>
-                                        <div class="sign-in">
-                                            <input type="submit" value="SIGNIN" >
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- //login -->
         @yield('script')
     </body>
 </html>
