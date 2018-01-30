@@ -33,3 +33,32 @@
 #toast-container{
     margin-top: 80px !important;
 }
+
+.search_result li{
+    list-style: none;
+    margin: 5px;
+}
+
+.search_result li:hover{
+    background-color: pink;
+}
+
+#keyword{
+    width: 513px;
+}
+
+.dropdown #header_dropdow{
+    float: left;margin-left: 100px;
+    margin-top: 25px;
+    list-style: none;
+    text-decoration: none;
+}
+
+.dropdown .header_ul_margin{
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.dropdown .d_block{
+    display: block;
+}

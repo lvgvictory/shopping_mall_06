@@ -20,14 +20,14 @@
                     </div>
                     <div class="mid-text">
                         <h4>{{ trans('messages.up_to_40%') }} <span> {{ trans('messages.off') }} </span></h4>
-                        <a class="hvr-outline-out button2" href="product.html"> {{ trans('messages.Shop_now') }} </a>
+                        <a class="hvr-outline-out button2" href="{{ route('home-page') }}"> {{ trans('messages.Shop_now') }} </a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="new-levis">
                     <div class="mid-text">
                         <h4>{{ trans('messages.up_to_50%') }} <span>{{ trans('messages.off') }}</span></h4>
-                        <a class="hvr-outline-out button2" href="product.html"> {{ trans('messages.Shop_now') }} </a>
+                        <a class="hvr-outline-out button2" href="{{ route('home-page') }}"> {{ trans('messages.Shop_now') }} </a>
                     </div>
                     <div class="mid-img">
                         <img src="site/images/dig.jpg" alt=" " />
@@ -243,10 +243,10 @@
                                         @php
                                         $price_discount = ($product->price * (1 - $proDiscount/100));
                                         @endphp
-                                        <span class="item_price"> {{ number_format($price_discount) }} {{ trans('messages.$') }} </span>
-                                        <del>{{ number_format($product->price) }} {{ trans('messages.$') }}</del>
+                                        <span class="item_price"> {!! number_format($price_discount) !!} {{ trans('messages.$') }} </span>
+                                        <del>{!! number_format($product->price) !!} {{ trans('messages.$') }}</del>
                                         @else
-                                        <span class="item_price"> {{ number_format($product->price) }} {{ trans('messages.$') }} </span>
+                                        <span class="item_price"> {!! number_format($product->price) !!} {{ trans('messages.$') }} </span>
                                         @endif
                                     </div>
                                     <a href="" class="item_add single-item hvr-outline-out button2 add_cart_button" itemID="{{ $product->id }}">{{ trans('messages.add_to_cart') }}</a>

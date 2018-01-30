@@ -8,7 +8,7 @@ $(window).load(function() {
 $(document).ready(function () {
     $('.add_cart_button').click(function (e) {
         e.preventDefault();
-        var item_price = $(this).parent().find('.item_price').text();
+        var item_price = $(this).parents().find('.item_price').text();
         var item_id = $(this).attr('itemID');
         $.ajax({
             url: '/add-cart',

@@ -5,6 +5,6 @@ return [
     'defaultPath'     => 'img/images/',
     'defaultOne' => 1,
     'defaultTwo' => 2,
-    'defaultPage' => 12,
+    'defaultPage' => 8,
     'elementPage' => 5,
 ];

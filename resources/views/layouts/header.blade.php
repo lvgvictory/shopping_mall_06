@@ -1,5 +1,5 @@
 <div class="header">
-    <div class="container">
+    <div class="container"> 
         <ul>
             <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{ trans('messages.Free_and_Fast_Delivery') }} </li>
             <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> {{ trans('messages.Free_shipping_On_all_orders') }} </li>
@@ -8,6 +8,7 @@
                 <a href="mailto:info@example.com">{{ trans('messages.info@example.com') }}</a>
             </li>
         </ul>
+        </div>
     </div>
 </div>
 <!-- //header -->
@@ -19,33 +20,54 @@
         </div>
         <div class="col-md-6 header-middle">
             <form>
+                {{-- <input type="hidden" name="_token" value="{{ csrf_token() }} ">--}}
                 <div class="search">
-                    <input type="search" value="{{ trans('messages.Search') }}" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '{{ trans('messages.Search') }}';}" required="">
-                </div>
-                <div class="section_room">
-                    <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                        @if (isset($categories))
-                            @foreach($categories as $category)
-                            <option value="{{ $category->id }}"> {{ $category->name }} </option>
-                            @endforeach
-                        @endif
-                    </select>
+                    <input id="keyword" type="search" value="{{ trans('messages.Search') }}" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '{{ trans('messages.Search') }}';}" required="">
                 </div>
                 <div class="sear-sub">
-                    <input type="submit" value=" ">
+                    <input id="search_product" type="submit" value=" ">
                 </div>
+                
                 <div class="clearfix"></div>
+                <ul class="search_result"></ul>
             </form>
         </div>
         <div class="col-md-3 header-right footer-bottom">
+            @if (Auth::check())
+            <div class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#" id="header_dropdow">
+                    <i class="fa fa-user"></i> @if (isset(Auth::user()->id)) {{Auth::user()->name}} @endif
+                    <b class="caret"></b>
+
+                </a>
+                <ul class="dropdown-menu extended logout header_ul_margin">
+                    <div class="log-arrow-up"></div>
+                    @if (Auth::user()->role == 1)
+                        <li class="eborder-top d_block">
+                            <a href="{{ route('dashbroad') }}"><i class="fa fa-tachometer"> {{ trans('messages.admin') }} </i></a>
+                        </li>
+                    @endif
+                    <li class="eborder-top d_block">
+                        <a href="#"><i class="fa fa-user"> {{ trans('messages.manage_user') }} </i></a>
+                    </li>
+                    <li class="d_block">
+                        <a href="{{ route('billcustomer', Auth::user()->id) }}"><i class="fa fa-first-order"> {{ trans('messages.My_order') }} </i></a>
+                    </li>
+                    <li class="d_block">
+                        <a href="{{route('admin.logout')}}"><i class="fa fa-sign-out">{{ trans('messages.Log_Out') }}</i></a>
+                    </li>
+                </ul>
+            </div>
+            @else
             <ul>
-                <li><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>{{ trans('messages.Login') }}</span></a>
+                <li><a href="{{ route('login')}}" class="use1"><span>{{ trans('messages.Login') }}</span></a>
                 </li>
                 <li><a class="fb" href="#"></a></li>
                 <li><a class="twi" href="#"></a></li>
                 <li><a class="insta" href="#"></a></li>
                 <li><a class="you" href="#"></a></li>
             </ul>
+            @endif
         </div>
         <div class="clearfix"></div>
     </div>
@@ -89,10 +111,12 @@
                                             </div>
                                             <div class="col-sm-3 multi-gd-img">
                                                 <ul class="multi-column-dropdown">
-                                                    @foreach($category->subCategories as $subCate)
-                                                    <li><a href="{{ route('mens', $subCate
-                                                        ->id)}}">{{ $subCate->name }}</a></li>
-                                                    @endforeach
+                                                    @if ($category->subCategories)
+                                                        @foreach($category->subCategories as $subCate)
+                                                        <li><a href="{{ route('mens', $subCate
+                                                            ->id)}}">{{ $subCate->name }}</a></li>
+                                                        @endforeach
+                                                    @endif
                                                 </ul>
                                             </div>
                                             <div class="clearfix"></div>
@@ -101,7 +125,7 @@
                                 </li>
                                 @endforeach
                             @endif
-                            <li class=" menu__item"><a class="menu__link" href="contact.html">{{ trans('messages.contact')  }}</a></li>
+                            <li class=" menu__item"><a class="menu__link" href="{{ route('home-page') }}">{{ trans('messages.contact')  }}</a></li>
                         </ul>
                     </div>
                 </div>

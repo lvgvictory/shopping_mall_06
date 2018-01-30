@@ -47,7 +47,8 @@ class HomePageController extends Controller
             'options' => ['img' => $image->image]
         ]);
 
-        $total = helper::customTotal();
+        //$total = helper::customTotal();
+        $total = Cart::subtotal(3);
         $count_cart = Cart::count();
 
         return response()->json([
@@ -59,7 +60,8 @@ class HomePageController extends Controller
 
     public function getCart()
     {
-        $total = helper::customTotal();
+        //$total = helper::customTotal();
+        $total = Cart::subtotal(3);
         $count_cart = Cart::count();
 
         return response()->json([
