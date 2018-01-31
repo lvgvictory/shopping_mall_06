@@ -179,7 +179,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-
     ],
 
     /*
@@ -235,4 +234,3 @@ return [
     ],
 
 ];
-
