@@ -9,7 +9,7 @@
 <!-- //banner -->
 <!-- single -->
 <div class="single">
-    <div class="container">
+    <div class="container rate">
         <div class="col-md-6 single-right-left animated wow slideInUp animated slideInUp1" data-wow-delay=".5s" style="">
             <div class="grid images_3_of_2">
                 <div class="flexslider">
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated slideInRight1" data-wow-delay=".5s" style="">
+        <div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated slideInRight1 rated" data-wow-delay=".5s" style="">
             <h3>{{ $product->name }}</h3>
             @php
                 $dis = $discount->discount;
@@ -56,7 +56,7 @@
                 <input class="rate_point" id="rating1" type="radio" name="rating" value="1" idProduct="{{$product->id}}" idUser="@if (isset(Auth::user()->id)) {{Auth::user()->id}} @endif">
                 <label for="rating1">{{ trans('messages.qualtity_5') }}</label>
                 </span>
-                <strong class="result_rate" style="margin-left: 10px; font-size: 20px;">{{ number_format($product->rate_point, 2) }}/{{ trans('messages.qualtity_5') }} ({{ $countRate }} Lượt) </strong>
+                <strong class="result_rate">{{ number_format($product->rate_point, 2) }}/{{ trans('messages.qualtity_5') }} ({{ $countRate }} Lượt) </strong>
             </div>
             <br>
             <div class="occasional">
