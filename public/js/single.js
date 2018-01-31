@@ -30,4 +30,28 @@ $(document).ready(function () {
                 $('.home_count_cart').html(res.count_cart);
             }
     });
+
+    $('.rate_point').click(function() {
+        var rate_point = $(this).val();
+        var id_user = $(this).attr('idUser');
+        var id_product = $(this).attr('idProduct');
+
+        if (id_user) {
+            $.ajax({
+                url: '/rate-point',
+                type: 'GET',
+                data: {rate_point: rate_point, id_user: id_user, id_product: id_product},
+                success: function (res) {
+                    var rate = res.rating.toFixed(2);
+                    var str = rate + "/5" + " (" + res.count + " Lượt)";
+                    $('.result_rate').html(str);
+                    toastr.success('Cám ơn bạn đã đánh giá');
+                }
+            });
+        }
+        else {
+            toastr.warning('Bạn cần phải đăng nhập trước khi đánh giá');
+        }
+        
+    });
 });

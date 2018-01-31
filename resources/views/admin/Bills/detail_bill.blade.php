@@ -59,10 +59,10 @@
                             @if ($bill->active == 2)
                             <option value="2" @if ($bill->active == 2) {{ 'selected=""' }} @endif> {{ trans('messages.done') }} </option>
                             @else
-                            <option class="del_option" value="0" @if ($bill->active == 0) {{ 'selected=""' }} @endif> Đang Chờ </option>
-                            <option class="del_option" value="1" @if ($bill->active == 1) {{ 'selected=""' }} @endif> Xác Nhận </option>
-                            <option value="2" @if ($bill->active == 2) {{ 'selected=""' }} @endif> {{ trans('messages.done') }}{{ trans('messages.done') }}{{ trans('messages.done') }} </option>
-                            <option class="del_option" value="3" @if ($bill->active == 3) {{ 'selected=""' }} @endif> Hủy Bỏ </option>
+                            <option class="del_option" value="0" @if ($bill->active == 0) {{ 'selected=""' }} @endif> {{ trans('messages.pending') }} </option>
+                            <option class="del_option" value="1" @if ($bill->active == 1) {{ 'selected=""' }} @endif> {{ trans('messages.confirm') }} </option>
+                            <option value="2" @if ($bill->active == 2) {{ 'selected=""' }} @endif> {{ trans('messages.done') }} </option>
+                            <option class="del_option" value="3" @if ($bill->active == 3) {{ 'selected=""' }} @endif> {{ trans('messages.Cancel') }} </option>
                             @endif
                         @endif
                     </select>

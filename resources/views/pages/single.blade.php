@@ -9,7 +9,7 @@
 <!-- //banner -->
 <!-- single -->
 <div class="single">
-    <div class="container">
+    <div class="container rate">
         <div class="col-md-6 single-right-left animated wow slideInUp animated slideInUp1" data-wow-delay=".5s" style="">
             <div class="grid images_3_of_2">
                 <div class="flexslider">
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated slideInRight1" data-wow-delay=".5s" style="">
+        <div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated slideInRight1 rated" data-wow-delay=".5s" style="">
             <h3>{{ $product->name }}</h3>
             @php
                 $dis = $discount->discount;
@@ -42,20 +42,21 @@
             @else
             <p><span class="item_price">{{ number_format($product->price) }} {{ trans('messages.$') }}</span></p>
             @endif
-            
             <div class="rating1">
+                <div>Đánh Giá:</div>
                 <span class="starRating">
-                <input id="rating5" type="radio" name="rating" value="5" @if ($product->rate_point == 5) {{'checked=""'}} @endif>
+                <input class="rate_point" id="rating5" type="radio" name="rating" value="5" idProduct="{{$product->id}}" idUser="@if (isset(Auth::user()->id)) {{Auth::user()->id}} @endif">
                 <label for="rating5">{{ trans('messages.qualtity_1') }}</label>
-                <input id="rating4" type="radio" name="rating" value="4" @if ($product->rate_point == 4) {{'checked=""'}} @endif>
+                <input class="rate_point" id="rating4" type="radio" name="rating" value="4" idProduct="{{$product->id}}" idUser="@if (isset(Auth::user()->id)) {{Auth::user()->id}} @endif">
                 <label for="rating4">{{ trans('messages.qualtity_2') }}</label>
-                <input id="rating3" type="radio" name="rating" value="3" @if ($product->rate_point == 3) {{'checked=""'}} @endif>
+                <input class="rate_point" id="rating3" type="radio" name="rating" value="3" idProduct="{{$product->id}}" idUser="@if (isset(Auth::user()->id)) {{Auth::user()->id}} @endif">
                 <label for="rating3">{{ trans('messages.qualtity_3') }}</label>
-                <input id="rating2" type="radio" name="rating" value="2" @if ($product->rate_point == 2) {{'checked=""'}} @endif>
+                <input class="rate_point" id="rating2" type="radio" name="rating" value="2" idProduct="{{$product->id}}" idUser="@if (isset(Auth::user()->id)) {{Auth::user()->id}} @endif">
                 <label for="rating2">{{ trans('messages.qualtity_4') }}</label>
-                <input id="rating1" type="radio" name="rating" value="1" @if ($product->rate_point == 1) {{'checked=""'}} @endif>
+                <input class="rate_point" id="rating1" type="radio" name="rating" value="1" idProduct="{{$product->id}}" idUser="@if (isset(Auth::user()->id)) {{Auth::user()->id}} @endif">
                 <label for="rating1">{{ trans('messages.qualtity_5') }}</label>
                 </span>
+                <strong class="result_rate">{{ number_format($product->rate_point, 2) }}/{{ trans('messages.qualtity_5') }} ({{ $countRate }} Lượt) </strong>
             </div>
             <br>
             <div class="occasional">
@@ -116,8 +117,7 @@
                             <div class="add-review">
                                 <h4>{{ trans('messages.Reviews') }}</h4>
                                 <form>
-                                    <textarea type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '{{ trans('messages.Message') }}';}" required="">
-                                        {{ trans('messages.Message') }}
+                                    <textarea type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '{{trans('messages.Message')}}';}" required="">{{trans('messages.Message')}}
                                     </textarea>
                                     <input type="submit" value="{{ trans('messages.send_1') }}">
                                 </form>

@@ -62,3 +62,8 @@
 .dropdown .d_block{
     display: block;
 }
+
+.single .rate .rated .rating1 .result_rate{
+    margin-left: 10px;
+    font-size: 20px;
+}

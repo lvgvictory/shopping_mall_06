@@ -76,6 +76,12 @@ Route::get('del-bill/{id}', [
     'uses' => 'BillCustomerController@getDeleteBill'
 ]);
 
+//Rating - CheckOutController
+Route::get('/rate-point', [
+    'as' => 'ratepoint',
+    'uses' => 'CheckOutController@getRatePoint'
+]);
+
 //Thêm vào CSDL
 Route::post('check-out', [
     'as' => 'checkout', 

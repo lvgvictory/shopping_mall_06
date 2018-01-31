@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Bill;
 use App\Models\BillDetail;
+use App\Models\Product;
+use App\Models\Comment;
 use Session;
 use Cart;
 use DB;
@@ -126,6 +128,43 @@ class CheckOutController extends Controller
             $email = $request->check_mail;
             $count = User::where('email', $email)->count();
             return response()->json($count);
+        }
+    }
+
+    public function getRatePoint(Request $request)
+    {      
+        DB::beginTransaction();
+        try {
+                $rate = $request->rate_point;
+                $id_user = $request->id_user;
+                $id_product = $request->id_product;
+
+                $rated = Comment::updateOrCreate(
+                    ['user_id' => $id_user, 'product_id' => $id_product],
+                    ['rate' => $rate]
+                );
+
+                $count = Comment::where('product_id', $id_product)->count();
+                $sum_rate = Comment::where('product_id', $id_product)->sum('rate');
+                $rating = $sum_rate/$count;
+
+                $product = Product::find($id_product);
+
+                $product->rate_point = $rating;
+
+                $product->save();
+
+                DB::commit();
+
+                return response()->json([
+                    'rating' => $rating,
+                    'count' => $count
+                ]);
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            $html = abort(404)->render();
+            return response($html);
         }
     }
 }
