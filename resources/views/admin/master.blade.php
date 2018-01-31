@@ -190,8 +190,8 @@
                             <span class="menu-arrow arrow_carrot-right"></span>
                             </a>
                             <ul class="sub">
-                                <li><a class="" href="profile.html">{{ trans('master_admin.add') }}</a></li>
-                                <li><a class="" href="login.html"><span>{{ trans('master_admin.list') }}</span></a></li>
+                                <li><a class="" href="{{ route('product.create') }}">{{ trans('master_admin.add') }}</a></li>
+                                <li><a class="" href="{{ route('product.index') }}"><span>{{ trans('master_admin.list') }}</span></a></li>
                             </ul>
                         </li>
                         <li class="sub-menu ">
@@ -221,6 +221,7 @@
                     @yield('list-subcategory')
                     @yield('add-subcategory')
                     @yield('edit-subcategory')
+                    @yield('add-product')
                     <!-- page end-->
                 </section>
             </section>

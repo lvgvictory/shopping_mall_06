@@ -31,43 +31,43 @@ Route::get('single/{id}', [
 ]);
 
 Route::get('show-cart', [
-    'as' => 'showcart', 
+    'as' => 'showcart',
     'uses' => 'CartController@showCart'
 ]);
 
 Route::get('get-cart', [
-    'as' => 'getcart', 
+    'as' => 'getcart',
     'uses' => 'HomePageController@getCart'
 ]);
 
 
 Route::get('del-cart', [
-    'as' => 'delcart', 
+    'as' => 'delcart',
     'uses' => 'CartController@delCart'
 ]);
 
 Route::get('add-cart', [
-    'as' => 'addcart', 
+    'as' => 'addcart',
     'uses' => 'HomePageController@addCart'
 ]);
 
 Route::get('update-cart', [
-    'as' => 'updatecart', 
+    'as' => 'updatecart',
     'uses' => 'CartController@updateCart'
 ]);
 
 Route::get('search-product', [
-    'as' => 'searchproduct', 
+    'as' => 'searchproduct',
     'uses' => 'AjaxController@searchProduct'
 ]);
 
 Route::get('bill-customer/{id}', [
-    'as' => 'billcustomer', 
+    'as' => 'billcustomer',
     'uses' => 'BillCustomerController@getIndex'
 ]);
 
 Route::get('bill-detail-customer/{id}', [
-    'as' => 'billdetailcustomer', 
+    'as' => 'billdetailcustomer',
     'uses' => 'BillCustomerController@getBillDetail'
 ]);
 
@@ -84,12 +84,12 @@ Route::get('/rate-point', [
 
 //Thêm vào CSDL
 Route::post('check-out', [
-    'as' => 'checkout', 
+    'as' => 'checkout',
     'uses' => 'CheckOutController@postCheckout'
 ]);
 
 Route::get('check-email', [
-    'as' => 'checkemail', 
+    'as' => 'checkemail',
     'uses' => 'CheckOutController@getCheckEmail'
 ]);
 
@@ -129,4 +129,6 @@ Route::get('delete-bill/{id}', [
     'as' => 'deletebill',
     'uses' => 'Admin\BillController@getDelBill'
 ]);
+
+Route::resource('product', 'Admin\ProductController');
 });
