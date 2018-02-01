@@ -27,7 +27,9 @@
                                 @php
                                     $sub = $category->subCategories->first();
                                 @endphp
-                            <li><a href="{{ route('mens', $sub->id) }}"> {{ $category->name }} </li>
+                                @if (isset($sub))
+                                    <li><a href="{{ route('mens', $sub->id) }}"> {{ $category->name }} </li>
+                                @endif
                             @endforeach
                         @endif
                         <li><a href="contact.html">{{ trans('messages.contact') }}</a></li>
