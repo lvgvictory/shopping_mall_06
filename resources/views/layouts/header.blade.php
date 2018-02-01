@@ -96,33 +96,35 @@
                             </li>
                             @if (isset($categories))
                                 @foreach($categories as $category)
-                                <li class="dropdown menu__item">
-                                    <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    {{ $category->name }}
-                                    <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu multi-column columns-3">
-                                        <div class="row">
-                                            <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-                                                @php
-                                                $sub = $category->subCategories->first();
-                                                @endphp
-                                                <a href="{{ route('mens', $sub->id) }}"><img src="site/images/{{ $category->avatar }}" alt=" "/></a>
-                                            </div>
-                                            <div class="col-sm-3 multi-gd-img">
-                                                <ul class="multi-column-dropdown">
-                                                    @if ($category->subCategories)
-                                                        @foreach($category->subCategories as $subCate)
-                                                        <li><a href="{{ route('mens', $subCate
-                                                            ->id)}}">{{ $subCate->name }}</a></li>
-                                                        @endforeach
+                                    <li class="dropdown menu__item">
+                                        <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        {{ $category->name }}
+                                        <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu multi-column columns-3">
+                                            <div class="row">
+                                                <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
+                                                    @php
+                                                        $sub = $category->subCategories->first();
+                                                    @endphp
+                                                    @if (isset($sub))
+                                                    <a href="{{ route('mens', $sub->id) }}"><img src="img/images/{{ $category->avatar }}" alt=" "/></a>
                                                     @endif
-                                                </ul>
+                                                </div>
+                                                <div class="col-sm-3 multi-gd-img">
+                                                    <ul class="multi-column-dropdown">
+                                                        @if ($category->subCategories)
+                                                            @foreach($category->subCategories as $subCate)
+                                                            <li><a href="{{ route('mens', $subCate
+                                                                ->id)}}">{{ $subCate->name }}</a></li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
                                             </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </ul>
-                                </li>
+                                        </ul>
+                                    </li>
                                 @endforeach
                             @endif
                             <li class=" menu__item"><a class="menu__link" href="{{ route('home-page') }}">{{ trans('messages.contact')  }}</a></li>
