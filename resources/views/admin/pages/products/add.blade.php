@@ -14,24 +14,26 @@
 <div class="row">
    <div class="col-lg-8">
       <section class="panel-body">
-         @if ($errors->any())
-         <div class="alert alert-danger">
-            <ul>
-               @foreach ($errors->all() as $error)
-               <li>{{ $error }}</li>
-               @endforeach
-            </ul>
-         </div>
-         @endif
+         @if (Session::has('error'))
+               <div class="alert alert-danger"> {{Session::get('error')}} </div>
+            @endif
          <form class="form-horizontal" action="{{ route('product.store') }}" method="POST" enctype='multipart/form-data'>
             {{ csrf_field() }}
             <div class="form-group">
-               <label class="control-label col-lg-2" for="tags">{{ trans('add_category_admin.name_subcategory') }}</label>
+               <label class="control-label col-lg-2" for="tags">{{ trans('add_product_admin.select_category') }}</label>
                <div class="col-lg-10">
-                  <select class="form-control input-lg m-bot15" name="subcategory_id" id="sel1">
-                     @foreach($subcategories as $cate)
+                  <select class="form-control input-lg m-bot15" name="category" id="category_value">
+                     <option value="0"> {{ trans('add_product_admin.select_category') }} </option>
+                     @foreach($categories as $cate)
                      <option value="{{ $cate->id }}">{{ $cate->name }}</option>
                      @endforeach
+                  </select>
+               </div>
+            </div>
+            <div class="form-group">
+               <label class="control-label col-lg-2" for="tags">{{ trans('add_category_admin.name_subcategory') }}</label>
+               <div class="col-lg-10 result_sub">
+                  <select class="form-control input-lg m-bot15" name="subcategory_id" id="sel1">
                   </select>
                </div>
             </div>
@@ -120,4 +122,7 @@
       </section>
    </div>
 </div>
+@endsection
+@section('script')
+   {{ Html::script('/js/admin/product.js') }}
 @endsection

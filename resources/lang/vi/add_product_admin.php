@@ -1,6 +1,7 @@
 <?php
 return [
     'add_product' => 'Thêm Sản Phẩm',
+    'select_category' => 'Chọn danh mục',
     'name_product' => 'Tên Sản Phẩm',
     'name_product_here' => 'Nhập Sản Phẩm',
     'price' => 'Giá Sản Phẩm',

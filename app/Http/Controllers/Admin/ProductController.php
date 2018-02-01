@@ -11,7 +11,9 @@ use App\Models\Size;
 use App\Models\Discount;
 use App\Models\Image;
 use App\Models\ProductSize;
+use App\Models\Category;
 use DB;
+use Session;
 
 class ProductController extends Controller
 {
@@ -37,8 +39,14 @@ class ProductController extends Controller
         $subcategories = SubCategory::all();
         $sizes = Size::all();
         $discount = Discount::all();
+        $categories = Category::all();
 
-        return view('admin.pages.products.add', compact('subcategories', 'sizes', 'discount'));
+        return view('admin.pages.products.add', compact([
+            'subcategories',
+            'sizes',
+            'discount',
+            'categories'
+        ]));
     }
 
     /**
@@ -51,6 +59,10 @@ class ProductController extends Controller
     {
         DB::beginTransaction();
         try {
+            if (!$request->category) {
+                return redirect()->back()->with('error', 'Bạn chưa chọn danh mục cho sản phẩm');
+            }
+
             $products = new Product;
             $products->subcategory_id = $request->subcategory_id;
             $products->name = $request->name;
@@ -133,5 +145,16 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getCategory(Request $request)
+    {
+        if ($request->ajax()) {
+            $cate_id = $request->cate;
+            $subcategories = SubCategory::where('category_id', $cate_id)->get();
+
+            $html = view('admin.pages.products.ajax_subcategory', compact('subcategories'))->render();
+            return response($html);
+        }
     }
 }
