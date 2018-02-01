@@ -1,6 +1,7 @@
 <?php
 return [
     'add_product' => 'Add Products',
+    'select_category' => 'Select Category',
     'name_product' => 'Name Products',
     'name_product_here' => 'Enter Products here',
     'price' => 'Price: ',
