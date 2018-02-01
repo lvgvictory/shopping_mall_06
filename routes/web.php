@@ -131,4 +131,6 @@ Route::get('delete-bill/{id}', [
 ]);
 
 Route::resource('product', 'Admin\ProductController');
+Route::get('search-product', 'Admin\SearchController@getSearchProduct')->name('search.product');
+Route::get('search-sub-category', 'Admin\SearchController@getSearchSubCategory')->name('search.subCategory');
 });

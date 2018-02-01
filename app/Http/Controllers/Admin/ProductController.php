@@ -22,7 +22,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.products.list');
+        $products = Product::orderBy('id', 'desc')->paginate(config('custom.elementPage'));
+
+        return view('admin.pages.products.list', compact('products'));
     }
 
     /**

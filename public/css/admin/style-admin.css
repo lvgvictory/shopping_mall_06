@@ -5402,3 +5402,7 @@ span.customSelect.changed {
 .add-category {
     margin-bottom: 10px;
 }
+
+.search-product .search {
+    margin-top: -1px;
+}

@@ -3,6 +3,7 @@ return [
     'id' => 'ID',
     'name_category' => 'Tên Danh Mục',
     'name_subcategory' => 'Tên Danh Mục Con',
+    'name_product' => 'Tên Sản Phẩm',
     'image' => 'Ảnh',
     'action' => 'Hành động',
     'submit' => 'Thêm',
@@ -13,4 +14,7 @@ return [
     'address' => 'Địa chỉ',
     'password' => 'Mật Khẩu',
     'password_confirm' => 'Nhập lại Mật Khẩu',
+    'price' => 'Giá Sản Phẩm',
+    'description' => 'Mô Tả',
+    'result' => 'Kết quả tìm được: ',
 ];

@@ -1,6 +1,6 @@
-{{-- pages/products/list.blade.php --}}
+{{-- pages/products/search.blade.php --}}
 @extends('admin.master')
-@section('list-product')
+@section('search-product')
 <div class="row">
    <div class="col-lg-8">
       <h3 class="page-header"><i class="fa fa fa-bars"></i> {{ trans('list_product_admin.list_product') }}</h3>
@@ -9,10 +9,10 @@
    <div class="col-lg-4">
       <ul class="nav top-menu search-product">
          <li>
-             <form class="navbar-form" action="{{ route('search.product') }}">
-                 <input class="form-control search" id="search" name="key" placeholder="{{ trans('master_admin.search') }}" type="text">
-                 <input type="submit" name="txtSubmit" class="btn btn-default btn-sm">
-             </form>
+            <form class="navbar-form" action="{{ route('search.product') }}">
+               <input class="form-control search" id="search" name="key" placeholder="{{ trans('master_admin.search') }}" type="text">
+               <input type="submit" name="txtSubmit" class="btn btn-default btn-sm">
+            </form>
          </li>
       </ul>
    </div>
@@ -20,9 +20,12 @@
    <div class="col-lg-12">
       <ol class="breadcrumb">
          <li><i class="fa fa-home"></i><a href="index.html">{{ trans('master_admin.dashbroad') }}</a></li>
-         <li><i class="fa fa-bars"></i>{{ trans('list_product_admin.product') }}</li>
-         <li><i class="fa fa-square-o"></i>{{ trans('list_product_admin.list_product') }}</li>
+         <li><i class="fa fa-bars"></i> {{ trans('list_product_admin.product') }}</li>
+         <li><i class="fa fa-square-o"></i> {{ trans('list_product_admin.list_product') }}</li>
       </ol>
+   </div>
+   <div class="col-lg-12">
+      <h3>{{ trans('table_admin.result') }} {{ count($product) }}</h3>
    </div>
 </div>
 <div class="row">
@@ -38,14 +41,14 @@
                   <th><i class="fa fa-file-text-o"></i> {{ trans('table_admin.name_subcategory') }}</th>
                   <th><i class="icon_cogs"></i> {{ trans('table_admin.action') }}</th>
                </tr>
-               @foreach ($products as $product)
+               @foreach ($product as $product)
                <tr>
                   <td>{{ $product->id }}</td>
                   <td>{{ $product->name }}</td>
                   <td>{{ $product->price }}</td>
                   <td>{{ $product->description }}</td>
                   @php
-                  $subCate = $product->subCategory;
+                    $subCate = $product->subCategory;
                   @endphp
                   <td>{{ $subCate->name }}</td>
                   <td>
@@ -58,7 +61,6 @@
                @endforeach
             </tbody>
          </table>
-         {{  $products->links() }}
       </section>
    </div>
 </div>
