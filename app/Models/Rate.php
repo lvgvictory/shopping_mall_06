@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Rate extends Model
 {
-	 protected $fillable = [
-	 	'content',
+    protected $fillable = [
+	 	'rate',
 	 	'user_id',
 	 	'product_id'
 	 ];

@@ -8,6 +8,7 @@ use App\Models\Bill;
 use App\Models\BillDetail;
 use App\Models\Product;
 use App\Models\Comment;
+use App\Models\Rate;
 use Session;
 use Cart;
 use DB;
@@ -60,7 +61,7 @@ class CheckOutController extends Controller
                 $user->name = $request->name;
                 $user->email = $request->email;
                 $user->image = config('custom.defaultAvatar');
-                $user->password = "";
+                $user->password = bcrypt('123456');
                 $user->role = config('custom.defaultTwo');
                 $user->phone = $request->phone;
                 $user->address = $request->address;
@@ -139,13 +140,13 @@ class CheckOutController extends Controller
                 $id_user = $request->id_user;
                 $id_product = $request->id_product;
 
-                $rated = Comment::updateOrCreate(
+                $rated = Rate::updateOrCreate(
                     ['user_id' => $id_user, 'product_id' => $id_product],
                     ['rate' => $rate]
                 );
 
-                $count = Comment::where('product_id', $id_product)->count();
-                $sum_rate = Comment::where('product_id', $id_product)->sum('rate');
+                $count = Rate::where('product_id', $id_product)->count();
+                $sum_rate = Rate::where('product_id', $id_product)->sum('rate');
                 $rating = $sum_rate/$count;
 
                 $product = Product::find($id_product);

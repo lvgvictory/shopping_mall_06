@@ -82,6 +82,12 @@ Route::get('/rate-point', [
     'uses' => 'CheckOutController@getRatePoint'
 ]);
 
+//Comment - SingleController
+Route::post('/comment', [
+    'as' => 'comment',
+    'uses' => 'SingleController@postComment'
+]);
+
 //Thêm vào CSDL
 Route::post('check-out', [
     'as' => 'checkout',
