@@ -42,7 +42,8 @@ class BillController extends Controller
                 return response($html);
             }
 
-            $bills = Bill::where('active', $status)->paginate(config('custom.defaultPage'));
+            // $bills = Bill::where('active', $status)->paginate(config('custom.defaultPage'));
+            $bills = Bill::where('active', $status)->paginate(1);
             $html = view('admin.Bills.ajax_fillter_bill', compact('bills'))->render();
 
             return response($html);

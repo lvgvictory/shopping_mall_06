@@ -26,8 +26,8 @@
                 <tr class="rem1">
                     <td class="invert-closeb">
                         @if ($bill->active == 0)
-                        <div class="rem">
-                            <a class="delete-product" href="{{ route('delbill', $bill->id) }}" onclick="return confirm('Bạn có chắc là muốn xóa?')"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+                        <div>
+                            <a href="{{ route('delbill', $bill->id) }}" onclick="return confirm('Bạn có chắc là muốn xóa?')"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
                         </div>
                         @endif
                     </td>

@@ -42,7 +42,7 @@ $(document).ready(function () {
                 type: 'GET',
                 data: {rate_point: rate_point, id_user: id_user, id_product: id_product},
                 success: function (res) {
-                    var rate = res.rating.toFixed(2);
+                    var rate = res.rating.toFixed(1);
                     var str = rate + "/5" + " (" + res.count + " Lượt)";
                     $('.result_rate').html(str);
                     toastr.success('Cám ơn bạn đã đánh giá');
@@ -53,5 +53,34 @@ $(document).ready(function () {
             toastr.warning('Bạn cần phải đăng nhập trước khi đánh giá');
         }
         
+    });
+
+    $('#button_comment').click(function(e) {
+        e.preventDefault();
+        var button_comment = $(this);
+        var id_user = $(this).attr('iduser');
+        var id_product = $(this).attr('idproduct');
+        var content_comment = $('.content_comment').val();
+        var token = $('.token_comment').val();
+
+        if (id_user) {
+            $.ajax({
+                url: '/comment',
+                type: 'POST',
+                data: {
+                    id_user: id_user,
+                    content_comment: content_comment,
+                    id_product: id_product,
+                    "_token": token
+                },
+                success: function (res) {
+                    button_comment.parents().find('.result_comment').prepend(res);
+                    $('#content_comment').val('');
+                }
+            });            
+        }
+        else {
+            toastr.warning('Bạn cần phải đăng nhập trước khi nhận xét');
+        }
     });
 });

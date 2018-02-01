@@ -56,7 +56,7 @@
                 <input class="rate_point" id="rating1" type="radio" name="rating" value="1" idProduct="{{$product->id}}" idUser="@if (isset(Auth::user()->id)) {{Auth::user()->id}} @endif">
                 <label for="rating1">{{ trans('messages.qualtity_5') }}</label>
                 </span>
-                <strong class="result_rate">{{ number_format($product->rate_point, 2) }}/{{ trans('messages.qualtity_5') }} ({{ $countRate }} Lượt) </strong>
+                <strong class="result_rate">{{ number_format($product->rate_point, 1) }}/{{ trans('messages.qualtity_5') }} ({{ $countRate }} Lượt) </strong>
             </div>
             <br>
             <div class="occasional">
@@ -97,6 +97,8 @@
                     </div>
                     <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="profile" aria-labelledby="profile-tab">
                         <div class="bootstrap-tab-text-grids">
+                            <div class="bootstrap-tab-text-grid result_comment">
+                            </div>
                             @foreach ($comment as $cmt)
                             <div class="bootstrap-tab-text-grid">
                                 <div class="bootstrap-tab-text-grid-left">
@@ -114,12 +116,15 @@
                                 <div class="clearfix"> </div>
                             </div>
                             @endforeach
+                            <div>
+                                {{ $comment->links() }}
+                            </div>
                             <div class="add-review">
                                 <h4>{{ trans('messages.Reviews') }}</h4>
-                                <form>
-                                    <textarea type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '{{trans('messages.Message')}}';}" required="">{{trans('messages.Message')}}
-                                    </textarea>
-                                    <input type="submit" value="{{ trans('messages.send_1') }}">
+                                <form method="POST">
+                                    <input class="token_comment" type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <textarea id="content_comment" class="content_comment" placeholder="Nhận Xét ..."></textarea>
+                                    <input id="button_comment" type="submit" value="{{ trans('messages.send_1') }}" idproduct="{{$product->id}}" iduser="@if (isset(Auth::user()->id)){{Auth::user()->id}}@endif">
                                 </form>
                             </div>
                         </div>
