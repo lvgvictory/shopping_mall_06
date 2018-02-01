@@ -2,8 +2,22 @@
 @extends('admin.master')
 @section('list-subcategory')
 <div class="row">
-    <div class="col-lg-12">
+    {{-- start search --}}
+    <div class="col-lg-8">
         <h3 class="page-header"><i class="fa fa fa-bars"></i> {{ trans('list_category_admin.list_subcategory') }}</h3>
+    </div>
+   <div class="col-lg-4">
+      <ul class="nav top-menu search-product">
+         <li>
+             <form class="navbar-form" action="{{ route('search.subCategory') }}">
+                 <input class="form-control search" id="search" name="key" placeholder="{{ trans('master_admin.search') }}" type="text">
+                 <input type="submit" name="txtSubmit" class="btn btn-default btn-sm">
+             </form>
+         </li>
+      </ul>
+   </div>
+   {{-- end search --}}
+    <div class="col-lg-12">
         <ol class="breadcrumb">
             <li><i class="fa fa-home"></i><a href="index.html">{{ trans('master_admin.dashbroad') }}</a></li>
             <li><i class="fa fa-bars"></i>{{ trans('master_admin.subcategory') }} </li>
@@ -28,7 +42,10 @@
                 <tr>
                     <td>{{ $subCategory->id }}</td>
                     <td>{{ $subCategory->name }}</td>
-                    <td>{{ $subCategory->category_id }}</td>
+                    @php
+                    $category = $subCategory->category;
+                    @endphp
+                    <td>{{ $category->name }}</td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-success"

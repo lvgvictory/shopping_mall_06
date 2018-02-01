@@ -219,9 +219,12 @@
                     @yield('add-category')
                     @yield('edit-category')
                     @yield('list-subcategory')
+                    @yield('search-subcategory')
                     @yield('add-subcategory')
                     @yield('edit-subcategory')
                     @yield('add-product')
+                    @yield('list-product')
+                    @yield('search-product')
                     <!-- page end-->
                 </section>
             </section>

@@ -3,6 +3,7 @@ return [
     'id' => 'ID',
     'name_category' => 'Name Category',
     'name_subcategory' => 'Name SubCategory',
+    'name_product' => 'Name Product',
     'image' => 'Image',
     'action' => 'Action',
     'submit' => 'Submit',
@@ -13,4 +14,7 @@ return [
     'address' => 'Address',
     'password' => 'Password',
     'password_confirm' => 'Password Confirm',
+    'price' => 'Price',
+    'description' => 'Description',
+    'result' => 'Result Search: ',
 ];
