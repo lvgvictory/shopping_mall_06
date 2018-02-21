@@ -39,8 +39,8 @@ class CartController extends Controller
         $quantity = $request->quantity;
         $rowID = $request->rowID;
 
-        Cart::update($rowID, $quantity);
-        $data = Cart::content();
+         Cart::update($rowID, $quantity);
+         $data = Cart::get($rowID);
 
         return response()->json([
             'data' => $data

@@ -76,20 +76,22 @@ $(document).ready(function () {
         });
     });
 
-    $('.entry').click(function (e) {
+    $('.qualyti_product').click(function (e) {
         e.preventDefault();
-        var qty = $(this).parent().find('.value').text();
-        var rowID = $('.delete-product').attr('idCart');
+        var qualyti_product = $(this);
+        var rowID = $(this).attr('idCart');
+        var qty = $(this).parent().find('.soluong').text();
+        console.log(rowID);
 
         $.ajax({
             url: '/update-cart',
             type: 'GET',
             data: {quantity: qty, rowID: rowID},
             success: function (res) {
-                $.each( res.data, function( key, value ) {
+                $.each( res, function( key, value ) {
                     let total_price = value.price * value.qty;
-                    $('.item_price').html(value.price + ' ' + ' vnd');
-                    $('.item_total_price').html(total_price + ' ' + ' vnd');
+                    qualyti_product.parents('.rem1').find('.item_price').html(value.price + ' ' + ' vnd');
+                    qualyti_product.parents('.rem1').find('.item_total_price').html(total_price + ' ' + ' vnd');
                 });
                 getCart();
                 toastr.success('Product Successfully!');

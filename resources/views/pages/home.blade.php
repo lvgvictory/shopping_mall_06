@@ -142,11 +142,11 @@
                                         @php
                                         $price_discount = ($product->price * (1 - $proDiscount/100));
                                         @endphp
-                                        <span class="item_price"> {{ number_format($price_discount, 0, ",", ".") }} {{ trans('messages.$') }} </span>
-                                        <del>{{ number_format($product['price'], 0, ",", ".") }} {{ trans('messages.$') }}</del>
+                                        <span class="item_price"> {{ number_format($price_discount) }} {{ trans('messages.$') }} </span>
+                                        <del>{{ number_format($product->price) }} {{ trans('messages.$') }}</del>
 
                                         @else
-                                        <span class="item_price"> {{ number_format($product['price'], 0, ",", ".") }} {{ trans('messages.$') }} </span>
+                                        <span class="item_price"> {{ number_format($product->price) }} {{ trans('messages.$') }} </span>
 
                                         @endif
                                     </div>
@@ -188,8 +188,8 @@
                                         $discount = ($product->discount/100);
                                         $price_discount = ($product->price * (1 - $discount));
                                         @endphp
-                                        <span class="item_price">{{ number_format($price_discount, 0, ",", ".") }} {{ trans('messages.$') }}</span>
-                                        <del>{{ number_format($product['price'], 0, ",", ".") }} {{ trans('messages.$') }}</del>
+                                        <span class="item_price">{{ number_format($price_discount) }} {{ trans('messages.$') }}</span>
+                                        <del>{{ number_format($product->price) }} {{ trans('messages.$') }}</del>
                                     </div>
                                     <a href="#" class="item_add single-item hvr-outline-out button2">
                                         {{ trans('messages.add_to_cart') }}
@@ -233,10 +233,10 @@
                                         @php
                                         $price_discount = ($product->price * (1 - $proDiscount/100));
                                         @endphp
-                                        <span class="item_price"> {!! number_format($price_discount, 0, ",", ".") !!} {{ trans('messages.$') }} </span>
+                                        <span class="item_price"> {!! number_format($price_discount) !!} {{ trans('messages.$') }} </span>
                                         <del>{!! number_format($product->price) !!} {{ trans('messages.$') }}</del>
                                         @else
-                                        <span class="item_price"> {!! number_format($product['price'], 0, ",", ".") !!} {{ trans('messages.$') }} </span>
+                                        <span class="item_price"> {!! number_format($product->price) !!} {{ trans('messages.$') }} </span>
                                         @endif
                                     </div>
                                     <a href="" class="item_add single-item hvr-outline-out button2 add_cart_button" itemID="{{ $product->id }}">{{ trans('messages.add_to_cart') }}</a>
